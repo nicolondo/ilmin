@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="mlm_marketing.list">
+      <field name="name">mlm_marketing list</field>
+      <field name="model">mlm_marketing.mlm_marketing</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="mlm_marketing.action_window">
+      <field name="name">mlm_marketing window</field>
+      <field name="res_model">mlm_marketing.mlm_marketing</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="mlm_marketing.action_server">
+      <field name="name">mlm_marketing server</field>
+      <field name="model_id" ref="model_mlm_marketing_mlm_marketing"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="mlm_marketing" id="mlm_marketing.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="mlm_marketing.menu_1" parent="mlm_marketing.menu_root"/>
+    <menuitem name="Menu 2" id="mlm_marketing.menu_2" parent="mlm_marketing.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="mlm_marketing.menu_1_list" parent="mlm_marketing.menu_1"
+              action="mlm_marketing.action_window"/>
+    <menuitem name="Server to list" id="mlm_marketing" parent="mlm_marketing.menu_2"
+              action="mlm_marketing.action_server"/>
+-->
+  </data>
+</odoo>
