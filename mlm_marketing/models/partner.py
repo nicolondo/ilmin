@@ -7,3 +7,5 @@ class Partner(models.Model):
 
     user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
                               default=lambda self: self.env.user)
+
+
