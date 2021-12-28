@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mlm_marketing_import_bom_wizard" model="ir.ui.view">
+        <field name="name">mlm_marketing_import_bom_wizard</field>
+        <field name="model">mlm_marketing.bom.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Bank Statement Lines">
+                <group>
+                    <field name="file"/>
+                </group>
+                <footer>
+                    <button name="import_bom_apply" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="mlm_marketing_import_bom_action" model="ir.actions.act_window">
+        <field name="name">Import BOM</field>
+        <field name="res_model">mlm_marketing.bom.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mlm_marketing_import_bom_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+        <menuitem id="mlm_marketing.import_bom" parent="stock.menu_stock_root" name="Import Bom" sequence="11"
+              action="mlm_marketing_import_bom_action"/>
+</odoo>

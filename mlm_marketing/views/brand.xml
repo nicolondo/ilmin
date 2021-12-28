@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="brand_list_object">
+        <field name="name">mlm_marketing_brand</field>
+        <field name="res_model">mlm_marketing.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="mlm_marketing.brand" parent="stock.menu_stock_root" name="Brands" sequence="10"
+              action="brand_list_object"/>
+
+</odoo>
