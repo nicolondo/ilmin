@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mlm_marketing_mlm_marketing,mlm_marketing.mlm_marketing,model_mlm_marketing_mlm_marketing,base.group_user,1,1,1,1
+access_mlm_marketing_ilmin_brand,mlm_marketing.brand,model_mlm_marketing_brand,base.group_user,1,1,1,1
+access_mlm_marketing_ilmin_bom_wizard,mlm_marketing.bom.wizard,model_mlm_marketing_bom_wizard,base.group_user,1,1,1,1

@@ -24,8 +24,11 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/res_users_views.xml',
+        'views/product.xml',
+        'views/brand.xml',
+        'views/import_bom_wizard.xml',
 
     ],
     # only loaded in demonstration mode
