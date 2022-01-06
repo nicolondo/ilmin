@@ -1,0 +1,199 @@
+.o_cc1 .nav-pills .nav-link.active, .navbar-light .nav-pills .nav-link.active, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_cc1 .nav-pills .show > .nav-link, .navbar-light .nav-pills .show > .nav-link, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link, .o_colored_level .o_cc1 .nav-pills .nav-link.active, .o_colored_level .navbar-light .nav-pills .nav-link.active, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_colored_level .o_cc1 .nav-pills .show > .nav-link, .o_colored_level .navbar-light .nav-pills .show > .nav-link, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link {
+    background-color: #252525;
+    color: #FFFFFF;
+}
+.bg-primary h1, .o_colored_level .bg-primary h1, .bg-secondary h1, .o_colored_level .bg-secondary h1, .bg-success h1, .o_colored_level .bg-success h1, .bg-info h1, .o_colored_level .bg-info h1, .bg-warning h1, .o_colored_level .bg-warning h1, .bg-danger h1, .o_colored_level .bg-danger h1, .bg-light h1, .o_colored_level .bg-light h1, .bg-dark h1, .o_colored_level .bg-dark h1, .bg-100 h1, .o_colored_level .bg-100 h1, .bg-200 h1, .o_colored_level .bg-200 h1, .bg-300 h1, .o_colored_level .bg-300 h1, .bg-400 h1, .o_colored_level .bg-400 h1, .bg-500 h1, .o_colored_level .bg-500 h1, .bg-600 h1, .o_colored_level .bg-600 h1, .bg-700 h1, .o_colored_level .bg-700 h1, .bg-800 h1, .o_colored_level .bg-800 h1, .bg-900 h1, .o_colored_level .bg-900 h1, .bg-white-85 h1, .o_colored_level .bg-white-85 h1, .bg-white-75 h1, .o_colored_level .bg-white-75 h1, .bg-white-50 h1, .o_colored_level .bg-white-50 h1, .bg-black-75 h1, .o_colored_level .bg-black-75 h1, .bg-black-50 h1, .o_colored_level .bg-black-50 h1, .bg-black h1, .o_colored_level .bg-black h1, .bg-white h1, .o_colored_level .bg-white h1, .card-body h1, .o_colored_level .card-body h1, .toast-body h1, .o_colored_level .toast-body h1, .bg-o-color-1 h1, .o_colored_level .bg-o-color-1 h1, .bg-o-color-2 h1, .o_colored_level .bg-o-color-2 h1, .bg-o-color-3 h1, .o_colored_level .bg-o-color-3 h1, .bg-o-color-4 h1, .o_colored_level .bg-o-color-4 h1, .bg-o-color-5 h1, .o_colored_level .bg-o-color-5 h1, .o_cc1 h1, .navbar-light h1, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h1, .o_colored_level .o_cc1 h1, .o_colored_level .navbar-light h1, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h1, .o_cc2 h1, .o_colored_level .o_cc2 h1, .o_cc3 h1, .o_colored_level .o_cc3 h1, .o_cc4 h1, .o_colored_level .o_cc4 h1, .o_cc5 h1, .o_footer h1, .o_colored_level .o_cc5 h1, .o_colored_level .o_footer h1, .o_figure_relative_layout .figure-caption h1, .o_colored_level .o_figure_relative_layout .figure-caption h1, .bg-primary h2, .o_colored_level .bg-primary h2, .bg-secondary h2, .o_colored_level .bg-secondary h2, .bg-success h2, .o_colored_level .bg-success h2, .bg-info h2, .o_colored_level .bg-info h2, .bg-warning h2, .o_colored_level .bg-warning h2, .bg-danger h2, .o_colored_level .bg-danger h2, .bg-light h2, .o_colored_level .bg-light h2, .bg-dark h2, .o_colored_level .bg-dark h2, .bg-100 h2, .o_colored_level .bg-100 h2, .bg-200 h2, .o_colored_level .bg-200 h2, .bg-300 h2, .o_colored_level .bg-300 h2, .bg-400 h2, .o_colored_level .bg-400 h2, .bg-500 h2, .o_colored_level .bg-500 h2, .bg-600 h2, .o_colored_level .bg-600 h2, .bg-700 h2, .o_colored_level .bg-700 h2, .bg-800 h2, .o_colored_level .bg-800 h2, .bg-900 h2, .o_colored_level .bg-900 h2, .bg-white-85 h2, .o_colored_level .bg-white-85 h2, .bg-white-75 h2, .o_colored_level .bg-white-75 h2, .bg-white-50 h2, .o_colored_level .bg-white-50 h2, .bg-black-75 h2, .o_colored_level .bg-black-75 h2, .bg-black-50 h2, .o_colored_level .bg-black-50 h2, .bg-black h2, .o_colored_level .bg-black h2, .bg-white h2, .o_colored_level .bg-white h2, .card-body h2, .o_colored_level .card-body h2, .toast-body h2, .o_colored_level .toast-body h2, .bg-o-color-1 h2, .o_colored_level .bg-o-color-1 h2, .bg-o-color-2 h2, .o_colored_level .bg-o-color-2 h2, .bg-o-color-3 h2, .o_colored_level .bg-o-color-3 h2, .bg-o-color-4 h2, .o_colored_level .bg-o-color-4 h2, .bg-o-color-5 h2, .o_colored_level .bg-o-color-5 h2, .o_cc1 h2, .navbar-light h2, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h2, .o_colored_level .o_cc1 h2, .o_colored_level .navbar-light h2, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h2, .o_cc2 h2, .o_colored_level .o_cc2 h2, .o_cc3 h2, .o_colored_level .o_cc3 h2, .o_cc4 h2, .o_colored_level .o_cc4 h2, .o_cc5 h2, .o_footer h2, .o_colored_level .o_cc5 h2, .o_colored_level .o_footer h2, .o_figure_relative_layout .figure-caption h2, .o_colored_level .o_figure_relative_layout .figure-caption h2, .bg-primary h3, .o_colored_level .bg-primary h3, .bg-secondary h3, .o_colored_level .bg-secondary h3, .bg-success h3, .o_colored_level .bg-success h3, .bg-info h3, .o_colored_level .bg-info h3, .bg-warning h3, .o_colored_level .bg-warning h3, .bg-danger h3, .o_colored_level .bg-danger h3, .bg-light h3, .o_colored_level .bg-light h3, .bg-dark h3, .o_colored_level .bg-dark h3, .bg-100 h3, .o_colored_level .bg-100 h3, .bg-200 h3, .o_colored_level .bg-200 h3, .bg-300 h3, .o_colored_level .bg-300 h3, .bg-400 h3, .o_colored_level .bg-400 h3, .bg-500 h3, .o_colored_level .bg-500 h3, .bg-600 h3, .o_colored_level .bg-600 h3, .bg-700 h3, .o_colored_level .bg-700 h3, .bg-800 h3, .o_colored_level .bg-800 h3, .bg-900 h3, .o_colored_level .bg-900 h3, .bg-white-85 h3, .o_colored_level .bg-white-85 h3, .bg-white-75 h3, .o_colored_level .bg-white-75 h3, .bg-white-50 h3, .o_colored_level .bg-white-50 h3, .bg-black-75 h3, .o_colored_level .bg-black-75 h3, .bg-black-50 h3, .o_colored_level .bg-black-50 h3, .bg-black h3, .o_colored_level .bg-black h3, .bg-white h3, .o_colored_level .bg-white h3, .card-body h3, .o_colored_level .card-body h3, .toast-body h3, .o_colored_level .toast-body h3, .bg-o-color-1 h3, .o_colored_level .bg-o-color-1 h3, .bg-o-color-2 h3, .o_colored_level .bg-o-color-2 h3, .bg-o-color-3 h3, .o_colored_level .bg-o-color-3 h3, .bg-o-color-4 h3, .o_colored_level .bg-o-color-4 h3, .bg-o-color-5 h3, .o_colored_level .bg-o-color-5 h3, .o_cc1 h3, .navbar-light h3, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h3, .o_colored_level .o_cc1 h3, .o_colored_level .navbar-light h3, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h3, .o_cc2 h3, .o_colored_level .o_cc2 h3, .o_cc3 h3, .o_colored_level .o_cc3 h3, .o_cc4 h3, .o_colored_level .o_cc4 h3, .o_cc5 h3, .o_footer h3, .o_colored_level .o_cc5 h3, .o_colored_level .o_footer h3, .o_figure_relative_layout .figure-caption h3, .o_colored_level .o_figure_relative_layout .figure-caption h3, .bg-primary h4, .o_colored_level .bg-primary h4, .bg-secondary h4, .o_colored_level .bg-secondary h4, .bg-success h4, .o_colored_level .bg-success h4, .bg-info h4, .o_colored_level .bg-info h4, .bg-warning h4, .o_colored_level .bg-warning h4, .bg-danger h4, .o_colored_level .bg-danger h4, .bg-light h4, .o_colored_level .bg-light h4, .bg-dark h4, .o_colored_level .bg-dark h4, .bg-100 h4, .o_colored_level .bg-100 h4, .bg-200 h4, .o_colored_level .bg-200 h4, .bg-300 h4, .o_colored_level .bg-300 h4, .bg-400 h4, .o_colored_level .bg-400 h4, .bg-500 h4, .o_colored_level .bg-500 h4, .bg-600 h4, .o_colored_level .bg-600 h4, .bg-700 h4, .o_colored_level .bg-700 h4, .bg-800 h4, .o_colored_level .bg-800 h4, .bg-900 h4, .o_colored_level .bg-900 h4, .bg-white-85 h4, .o_colored_level .bg-white-85 h4, .bg-white-75 h4, .o_colored_level .bg-white-75 h4, .bg-white-50 h4, .o_colored_level .bg-white-50 h4, .bg-black-75 h4, .o_colored_level .bg-black-75 h4, .bg-black-50 h4, .o_colored_level .bg-black-50 h4, .bg-black h4, .o_colored_level .bg-black h4, .bg-white h4, .o_colored_level .bg-white h4, .card-body h4, .o_colored_level .card-body h4, .toast-body h4, .o_colored_level .toast-body h4, .bg-o-color-1 h4, .o_colored_level .bg-o-color-1 h4, .bg-o-color-2 h4, .o_colored_level .bg-o-color-2 h4, .bg-o-color-3 h4, .o_colored_level .bg-o-color-3 h4, .bg-o-color-4 h4, .o_colored_level .bg-o-color-4 h4, .bg-o-color-5 h4, .o_colored_level .bg-o-color-5 h4, .o_cc1 h4, .navbar-light h4, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h4, .o_colored_level .o_cc1 h4, .o_colored_level .navbar-light h4, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h4, .o_cc2 h4, .o_colored_level .o_cc2 h4, .o_cc3 h4, .o_colored_level .o_cc3 h4, .o_cc4 h4, .o_colored_level .o_cc4 h4, .o_cc5 h4, .o_footer h4, .o_colored_level .o_cc5 h4, .o_colored_level .o_footer h4, .o_figure_relative_layout .figure-caption h4, .o_colored_level .o_figure_relative_layout .figure-caption h4, .bg-primary h5, .o_colored_level .bg-primary h5, .bg-secondary h5, .o_colored_level .bg-secondary h5, .bg-success h5, .o_colored_level .bg-success h5, .bg-info h5, .o_colored_level .bg-info h5, .bg-warning h5, .o_colored_level .bg-warning h5, .bg-danger h5, .o_colored_level .bg-danger h5, .bg-light h5, .o_colored_level .bg-light h5, .bg-dark h5, .o_colored_level .bg-dark h5, .bg-100 h5, .o_colored_level .bg-100 h5, .bg-200 h5, .o_colored_level .bg-200 h5, .bg-300 h5, .o_colored_level .bg-300 h5, .bg-400 h5, .o_colored_level .bg-400 h5, .bg-500 h5, .o_colored_level .bg-500 h5, .bg-600 h5, .o_colored_level .bg-600 h5, .bg-700 h5, .o_colored_level .bg-700 h5, .bg-800 h5, .o_colored_level .bg-800 h5, .bg-900 h5, .o_colored_level .bg-900 h5, .bg-white-85 h5, .o_colored_level .bg-white-85 h5, .bg-white-75 h5, .o_colored_level .bg-white-75 h5, .bg-white-50 h5, .o_colored_level .bg-white-50 h5, .bg-black-75 h5, .o_colored_level .bg-black-75 h5, .bg-black-50 h5, .o_colored_level .bg-black-50 h5, .bg-black h5, .o_colored_level .bg-black h5, .bg-white h5, .o_colored_level .bg-white h5, .card-body h5, .o_colored_level .card-body h5, .toast-body h5, .o_colored_level .toast-body h5, .bg-o-color-1 h5, .o_colored_level .bg-o-color-1 h5, .bg-o-color-2 h5, .o_colored_level .bg-o-color-2 h5, .bg-o-color-3 h5, .o_colored_level .bg-o-color-3 h5, .bg-o-color-4 h5, .o_colored_level .bg-o-color-4 h5, .bg-o-color-5 h5, .o_colored_level .bg-o-color-5 h5, .o_cc1 h5, .navbar-light h5, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h5, .o_colored_level .o_cc1 h5, .o_colored_level .navbar-light h5, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h5, .o_cc2 h5, .o_colored_level .o_cc2 h5, .o_cc3 h5, .o_colored_level .o_cc3 h5, .o_cc4 h5, .o_colored_level .o_cc4 h5, .o_cc5 h5, .o_footer h5, .o_colored_level .o_cc5 h5, .o_colored_level .o_footer h5, .o_figure_relative_layout .figure-caption h5, .o_colored_level .o_figure_relative_layout .figure-caption h5, .bg-primary h6, .o_colored_level .bg-primary h6, .bg-secondary h6, .o_colored_level .bg-secondary h6, .bg-success h6, .o_colored_level .bg-success h6, .bg-info h6, .o_colored_level .bg-info h6, .bg-warning h6, .o_colored_level .bg-warning h6, .bg-danger h6, .o_colored_level .bg-danger h6, .bg-light h6, .o_colored_level .bg-light h6, .bg-dark h6, .o_colored_level .bg-dark h6, .bg-100 h6, .o_colored_level .bg-100 h6, .bg-200 h6, .o_colored_level .bg-200 h6, .bg-300 h6, .o_colored_level .bg-300 h6, .bg-400 h6, .o_colored_level .bg-400 h6, .bg-500 h6, .o_colored_level .bg-500 h6, .bg-600 h6, .o_colored_level .bg-600 h6, .bg-700 h6, .o_colored_level .bg-700 h6, .bg-800 h6, .o_colored_level .bg-800 h6, .bg-900 h6, .o_colored_level .bg-900 h6, .bg-white-85 h6, .o_colored_level .bg-white-85 h6, .bg-white-75 h6, .o_colored_level .bg-white-75 h6, .bg-white-50 h6, .o_colored_level .bg-white-50 h6, .bg-black-75 h6, .o_colored_level .bg-black-75 h6, .bg-black-50 h6, .o_colored_level .bg-black-50 h6, .bg-black h6, .o_colored_level .bg-black h6, .bg-white h6, .o_colored_level .bg-white h6, .card-body h6, .o_colored_level .card-body h6, .toast-body h6, .o_colored_level .toast-body h6, .bg-o-color-1 h6, .o_colored_level .bg-o-color-1 h6, .bg-o-color-2 h6, .o_colored_level .bg-o-color-2 h6, .bg-o-color-3 h6, .o_colored_level .bg-o-color-3 h6, .bg-o-color-4 h6, .o_colored_level .bg-o-color-4 h6, .bg-o-color-5 h6, .o_colored_level .bg-o-color-5 h6, .o_cc1 h6, .navbar-light h6, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h6, .o_colored_level .o_cc1 h6, .o_colored_level .navbar-light h6, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar h6, .o_cc2 h6, .o_colored_level .o_cc2 h6, .o_cc3 h6, .o_colored_level .o_cc3 h6, .o_cc4 h6, .o_colored_level .o_cc4 h6, .o_cc5 h6, .o_footer h6, .o_colored_level .o_cc5 h6, .o_colored_level .o_footer h6, .o_figure_relative_layout .figure-caption h6, .o_colored_level .o_figure_relative_layout .figure-caption h6 {
+    color: #FFFFFF;
+}
+.progress-wizard .progress-wizard-step .progress-wizard-steplabel {
+    color: #AD8F56;
+}
+.progress-wizard .progress-wizard-step.active .progress-wizard-steplabel {
+    color: #AD8F56;
+}
+.progress-wizard .progress-wizard-step.active .progress-wizard-dot {
+    background: #AD8F56;
+}
+a {
+    color: #AD8F56;
+
+}
+.oe_website_sale {
+    max-width: 100%;
+}
+#top_menu_container {
+    max-width: 100%;
+}
+.btn-fill-primary, .btn-primary{
+    color: #FFFFFF;
+    background-color: #252525;
+    border-color : #252525;
+}
+.text-muted {
+    color: #FFFFFF;
+
+}
+.badge-primary {
+    color: #FFFFFF;
+    background-color: #252525 !important;
+}
+.o_wsale_products_item_title {
+    border-bottom: none !important;
+}
+.btn-secondary{
+    background-color:#AD8F56 !important;
+}
+
+body{
+    background-color:#000000 !important;
+}
+.navbar{
+    background-color:#121212 !important;
+
+}
+.navbar-light .navbar-nav .nav-link{
+    color:#FFFFFF !important
+}
+
+.table{
+    color:#FFFFFF !important
+}
+.card {
+    background-color : #000000 !important;
+}
+.card-body{
+    background-color : #000000 !important;
+}
+.oe_product_cart{
+    background-color : #000000 !important;
+    border-color: #1B170C !important;
+}
+.o_wsale_product_information{
+   poi : #000000 !important;
+}
+.o_wsale_products_item_title > a {
+    color:#CD9F54 !important;
+}
+
+.add_mass {
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+
+.js_add_cart_json_ilmin {
+    background-color : transparent !important;
+    color:#FFFFFF !important;
+
+}
+.js_delete_product_ilmin {
+    color:#FFFFFF !important;
+    font-size: 1.5rem;
+}
+
+.td-price{
+    font-weight: 700;
+}
+.js_quantity {
+    background-color: transparent !important;
+    color:#FFFFFF !important;
+    border-radius: 15px !important;
+    max-width: 100px !important;
+    width: 100px !important;
+
+}
+
+.oe_search_box {
+    background-color: #252525 !important;
+    border-color: #252525 !important;
+}
+
+@media (min-width: 1200px){
+
+    .card-body{
+        display : flex;
+    }
+    .table-desktop{
+        display:block;
+    }
+    .table-phone{
+        display:none;
+    }
+    .product_name {
+            width:10%;
+    }
+    .o_wsale_product_information_text{
+        width:90%;
+    }
+    .td-variant-name{
+        width:28%;
+    }
+    .td-add-mass{
+        width:14%
+    }
+    .td-qty{
+        width:10%
+
+    }
+    .td-price{
+        width:17%
+    }
+}
+@media (max-width: 400px) {
+    .o_wsale_products_main_row{
+        width:none;
+    }
+    .table-desktop{
+        display:none;
+    }
+    .table-phone{
+        display:block;
+    }
+    .product_name{
+        width:100%
+    }
+    .table {
+        font-size: 11px;
+
+    }
+    .add_mass {
+        font-size:1rem;
+    }
+    .td-variant-name{
+        width:28%;
+        display:inline-grid;
+    }
+    .td-add-mass{
+        width:41%;
+    }
+     .td-qty{
+        width:30%;
+    }
+     .td-action{
+        width:3%;
+        padding-top: 0.4rem !important;
+    }
+    .js_delete_product_ilmin {
+        font-size: 0.8rem;
+    }
+    .js_add_cart_json_ilmin{
+         font-size: 0.8rem;
+        padding:0.5rem !important;
+    }
+    .js_quantity {
+        max-width: 35px !important;
+        width: 35px !important;
+        height: min-content !important;
+        margin-top: 0.4rem !important;
+
+    }
+    .oe_product_cart{
+        width:100% !important;
+    }
+    .total_product{
+        display: block !important;
+        float: right;
+    }
+
+
+
+}

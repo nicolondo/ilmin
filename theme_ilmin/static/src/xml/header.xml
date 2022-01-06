@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ilmin_header" inherit_id="website.option_header_brand_logo" name="Ilmin header">
+
+        <!--hamburger menu-->
+        <xpath expr="//a[@t-attf-class]" position="before">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </xpath>
+
+        <xpath expr="//a[@t-attf-class]" position="replace">
+            <!--Brand logo-->
+            <a href="/" class="navbar-brand logo oleane_logo">
+                <img src="/oleane_custom_website/static/src/img/oleane_logo.png"/>
+            </a>
+
+            <!--shopping icons-->
+            <div class="d-flex shopping_icons d-lg-none">
+                <div class="p-2 flex-fill bd-highlight cart">
+                    <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+                    <a href="/shop/cart">
+                        <i class="dri dri-cart rounded-circle" id="shopping_cart_icon"/>
+                        <sup class="my_cart_quantity badge badge-primary mb-0 font-weight-bold"
+                             t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                             t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                    </a>
+                </div>
+            </div>
+
+            <!--Search box-->
+            <t class="category_dropdown" t-call="theme_prime.component_product_search_category_dropdown"/>
+            <t class="category_search" t-call="website_sale.website_sale_products_search_box"/>
+
+        </xpath>
+    </template>
+
+    <!--hide contact button in header-->
+    <template id="hide_contact_btn" inherit_id="website.template_header_default_oe_structure_header_default_1"
+              name="hide contact btn">
+        <xpath expr="//div[@id='oe_structure_header_default_1']" position="replace">
+        </xpath>
+    </template>
+
+
+    <template id="hide_menu_items" inherit_id="website.template_header_default" name="hide menu items">
+        <!--hide menu items-->
+        <xpath expr="//div[@id='top_menu_collapse']/t[1]/t[2]" position="replace">
+        </xpath>
+
+        <!--adding additional bootstrap classes-->
+        <xpath expr="//div[@class='container justify-content-start justify-content-lg-between']" position="attributes">
+            <attribute name="class">container justify-content-start justify-content-lg-between justify-content-between
+            </attribute>
+        </xpath>
+
+        <!--navbar for pages-->
+        <xpath expr="//nav[@class='navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm']"
+               position="after">
+            <nav class="navbar navbar-expand-lg navbar-light" id="nav_pages">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                    <div class="container">
+                        <div class="navbar-nav">
+                            <li>
+                                <a class="nav-link" href="/">Homepage</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href='/shop'>Shop</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href='/our-shops'>Our Shops</a>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </xpath>
+
+    </template>
+
+    <!--customize cart-->
+    <template id="custom_cart" inherit_id="website_sale.header_cart_link" name="custom cart">
+        <xpath expr="//li[2]" position="replace">
+            <div class="media align-items-center cart">
+                <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+                <div class="o_wsale_my_cart position-relative tp-cart-sidebar-action">
+                    <a href="/shop/cart">
+                        <i class="dri dri-cart rounded-circle" id="shopping_cart_icon"/>
+                        <sup class="my_cart_quantity badge badge-primary mb-0 font-weight-bold"
+                             t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                             t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                    </a>
+                </div>
+                <div class="media-body d-none d-xl-block">
+                    <div class="mb-1">My Cart</div>
+                    <a class="tp-cart-sidebar-action" href="#">
+                        <h6 class="mb-0 tp-link-dark">View Cart</h6>
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!--customize wishlist-->
+    <template id="custom_wishlist" inherit_id="website_sale_wishlist.header_wishlist_link" name="custom wishlist">
+        <xpath expr="//li[1]" position="replace">
+            <div class="media align-items-center wishlist">
+                <t t-set="wishcount" t-value="len(request.env['product.wishlist'].current())"/>
+                <div class="o_wsale_my_wish position-relative">
+                    <a href="/shop/wishlist">
+                        <i class="dri dri-wishlist rounded-circle" id="wishlist_icon"/>
+                        <sup t-esc="wishcount" t-attf-class="my_wish_quantity o_animate_blink badge badge-primary"/>
+                    </a>
+                </div>
+                <div class="media-body d-none d-xl-block">
+                    <div class="mb-1">My Wishlist</div>
+                    <a href="/shop/wishlist">
+                        <h6 class="mb-0 tp-link-dark">View Wishlist</h6>
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!--add admin avatar-->
+    <template id="custom_admin" inherit_id="portal.user_dropdown" name="custom admin">
+        <xpath expr="//i[1]" position="before">
+            <i class="dri dri-user rounded-circle" id="admin_avatar"></i>
+        </xpath>
+    </template>
+
+    <!--hide navbar toggle button-->
+    <template id="hide_navbar_toggle" inherit_id="website.navbar_toggler" name="hide navbar toggle">
+        <xpath expr="//button[1]" position="replace">
+        </xpath>
+    </template>
+
+    <!--store locations-->
+    <template id="store_locations" name="store locations" inherit_id="oleane_custom_website.oleane_header"
+              customize_show="True" active="True">
+        <xpath expr="." position="inside">
+            <!-- Button trigger modal -->
+            <div class="o_wsale_my_cart position-relative">
+                <a data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-map-marker rounded-circle" id="store_location"/>
+                </a>
+            </div>
+            <div class="media-body d-none d-xl-block">
+                <div class="mb-1 one-line-text">StoreName</div>
+                <a data-toggle="modal" data-target="#exampleModal" class="location">
+                    <h6 class="mb-0 one-line-text">Location</h6>
+                </a>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg stores_modal" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Discover Our Stores</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&amp;times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <t t-call="oleane_custom_website.our_stores"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+
+
+
+</odoo>
