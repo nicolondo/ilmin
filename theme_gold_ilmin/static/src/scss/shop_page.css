@@ -91,6 +91,7 @@ body{
 }
 .card-body{
     background-color : #000000 !important;
+    border-bottom: solid;
 }
 .oe_product_cart{
     background-color : #000000 !important;
