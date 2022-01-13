@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "ilmin_theme",
+    'name': "ilmin_website",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -16,7 +16,7 @@
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Theme/website',
+    'category': 'website',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
@@ -25,9 +25,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
         'views/website_template.xml',
+        'views/header_ilmin.xml',
 
     ],
     # only loaded in demonstration mode
@@ -36,8 +35,8 @@
     ],
     "assets": {
         "web.assets_frontend": [
-            "/theme_ilmin/static/src/css/shop_page.css",
-            "/theme_ilmin/static/src/js/shop.js",
+            "/website_ilmin/static/src/css/shop_page.css",
+            "/website_ilmin/static/src/js/shop.js",
 
         ]
     },
