@@ -7,8 +7,25 @@ body,.btn, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 ,.navbar-brand, 
     font-family: "Copperplate Gothic" !important;
 
 }
+.logo_login{
+     max-width: 300px;
+    position: relative;
+    margin: 50px auto;
+    text-align:center;
+}
 
 
+.oe_website_login_container {
+    border: solid 10px;
+    border-color: #D6B777;
+    min-height: 100%;
+
+
+}
+.oe_login_buttons > button{
+    background-color: #D6B777;
+    color: black;
+}
 .o_cc1 .nav-pills .nav-link.active, .navbar-light .nav-pills .nav-link.active, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_cc1 .nav-pills .show > .nav-link, .navbar-light .nav-pills .show > .nav-link, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link, .o_colored_level .o_cc1 .nav-pills .nav-link.active, .o_colored_level .navbar-light .nav-pills .nav-link.active, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_colored_level .o_cc1 .nav-pills .show > .nav-link, .o_colored_level .navbar-light .nav-pills .show > .nav-link, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link {
     background-color: #252525;
     color: #FFFFFF;
@@ -113,7 +130,7 @@ body{
 
 }
 
-.oe_search_box {
+.oe_search_box, input[name='login'],input[name='password']{
     background-color: #252525 !important;
     border-color: #252525 !important;
 }

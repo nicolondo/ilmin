@@ -1,5 +1,6 @@
 
 from odoo import api, models, _
+from odoo.exceptions import UserError
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -39,7 +40,7 @@ class SaleOrder(models.Model):
         product_tmpl_order_lines = order.order_line.filtered(
             lambda l: l.product_id.product_tmpl_id.id == product.product_tmpl_id.id)
         product_tmlp_total = sum(li.price_subtotal for li in product_tmpl_order_lines)
-
+        raise UserError(order.amount_total)
         return {'success': True, 'line_id': line.id if line else False,
                 'line_total': Monetary.value_to_html(line.price_subtotal if line else 0, {'display_currency': currency}),
                 'product_tmlp_total': 'TOTAL : '+Monetary.value_to_html(product_tmlp_total, {'display_currency': currency}),
