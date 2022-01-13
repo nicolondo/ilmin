@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Copperplate Gothic";
+    src: url("/theme_gold_ilmin/static/src/fonts/Copperplate_Gothic_Regular.ttf") format("truetype");
+}
+
+body,.btn, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 ,.navbar-brand, .navbar-text, .navbar .nav-link, .navbar a.js_change_lang span, .navbar a.o_add_language {
+    font-family: "Copperplate Gothic" !important;
+
+}
+
+
 .o_cc1 .nav-pills .nav-link.active, .navbar-light .nav-pills .nav-link.active, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_cc1 .nav-pills .show > .nav-link, .navbar-light .nav-pills .show > .nav-link, #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link, .o_colored_level .o_cc1 .nav-pills .nav-link.active, .o_colored_level .navbar-light .nav-pills .nav-link.active, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .nav-link.active, .o_colored_level .o_cc1 .nav-pills .show > .nav-link, .o_colored_level .navbar-light .nav-pills .show > .nav-link, .o_colored_level #wrapwrap.o_header_overlay > header:not(.o_header_affixed):not(.o_top_menu_collapse_shown) > .navbar .nav-pills .show > .nav-link {
     background-color: #252525;
     color: #FFFFFF;
@@ -197,3 +208,6 @@ body{
 
 
 }
+
+
+
