@@ -7,10 +7,25 @@
         </xpath>
         <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
             <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
-            <span t-attf-class="d-none d-lg-inline font-weight-bold text-muted nav-link my_cart_amount"
+            <span t-attf-class="ml-lg-auto d-none d-lg-inline font-weight-bold text-muted nav-link my_cart_amount"
                   t-esc="website_sale_order.amount_total"
                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
         </xpath>
+        <xpath expr='//t[@t-call="portal.placeholder_user_sign_in"]' position="replace">
+            <t t-call="portal.placeholder_user_sign_in">
+                <t t-set="_item_class" t-valuef="nav-item"/>
+                <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
+            </t>
+        </xpath>
+        <xpath expr='//t[@t-call="portal.user_dropdown"]' position="replace">
+            <t t-call="portal.user_dropdown">
+
+                <t t-set="_user_name" t-value="true"/>
+                <t t-set="_item_class" t-valuef="nav-item dropdown"/>
+                <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
+            </t>
+        </xpath>
+
     </template>
     <template id="no_footer" inherit_id="website.layout">
         <xpath expr="//div[@id='footer']" position="replace">
