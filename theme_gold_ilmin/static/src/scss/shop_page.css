@@ -86,6 +86,11 @@ body{
 .table{
     color:#FFFFFF !important
 }
+
+.table th{
+    border-color:#252525 !important;
+}
+
 .card {
     background-color : #000000 !important;
 }
@@ -109,12 +114,12 @@ body{
     border-radius: 10px;
 }
 
-.js_add_cart_json_ilmin {
+.js_add_cart_json_ilmin,.js_add_cart_json {
     background-color : transparent !important;
     color:#FFFFFF !important;
 
 }
-.js_delete_product_ilmin {
+.js_delete_product_ilmin, js_delete_product {
     color:#FFFFFF !important;
     font-size: 1.5rem;
 }
@@ -148,7 +153,7 @@ body{
         display:none;
     }
     .product_name {
-            width:10%;
+            width:20%;
     }
     .o_wsale_product_information_text{
         width:90%;
