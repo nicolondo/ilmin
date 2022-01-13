@@ -12,7 +12,10 @@
                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
         </xpath>
     </template>
-
+    <template id="no_footer" inherit_id="website.layout">
+        <xpath expr="//div[@id='footer']" position="replace">
+        </xpath>
+    </template>
 
     <template id="products_item" name="Ilmimn Products Item">
 
@@ -235,4 +238,20 @@
         </xpath>
     </template>
 
+
+    <template id="login" inherit_id="web.login" name="Login Inherit">
+        <xpath expr="//label[@for='login']" position="replace">
+        </xpath>
+        <xpath expr="//label[@for='password']" position="replace">
+        </xpath>
+        <xpath expr="//form[@class='oe_login_form']" position="before">
+            <div class="logo_login">
+                <div>
+                    <img src="/theme_gold_ilmin/static/src/img/parfum.svg"/>
+
+                </div>
+            </div>
+        </xpath>
+
+    </template>
 </odoo>
