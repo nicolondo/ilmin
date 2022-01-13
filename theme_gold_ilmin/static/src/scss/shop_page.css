@@ -7,6 +7,11 @@ body,.btn, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 ,.navbar-brand, 
     font-family: "Copperplate Gothic" !important;
 
 }
+
+h1, h2, h3, h4, h5, h6{
+    color: #FFFFFF;
+
+}
 .logo_login{
      max-width: 300px;
     position: relative;
@@ -38,6 +43,15 @@ body,.btn, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 ,.navbar-brand, 
 }
 .progress-wizard .progress-wizard-step.active .progress-wizard-steplabel {
     color: #AD8F56;
+}
+
+label{
+    color: #AD8F56;
+
+}
+span{
+    color: #FFFFFF;
+
 }
 .progress-wizard .progress-wizard-step.active .progress-wizard-dot {
     background: #AD8F56;
@@ -97,6 +111,7 @@ body{
 .card-body{
     background-color : #000000 !important;
     border-bottom: solid;
+    max-height: fit-content;
 }
 .oe_product_cart{
     background-color : #000000 !important;
@@ -190,7 +205,7 @@ body{
 
     }
     .add_mass {
-        font-size:1rem;
+        font-size:0.8rem;
     }
     .td-variant-name{
         width:28%;
@@ -223,12 +238,17 @@ body{
     .oe_product_cart{
         width:100% !important;
     }
+
     .total_product{
         display: block !important;
         float: right;
+        font-size: 12px;
+        color:#4A4A4A !important;
     }
+    .total_product > span, .total_product > span > span {
 
-
+        color:#4A4A4A !important;
+    }
 
 }
 
