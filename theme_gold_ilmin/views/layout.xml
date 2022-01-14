@@ -50,8 +50,6 @@
                     <h6 class="o_wsale_products_item_title mb-1">
                         <a class="text-primary text-decoration-none" itemprop="name" t-att-href="product_href"
                            t-att-content="product.name" t-field="product.name"/>
-                        <a role="button" t-if="not product.website_published" t-att-href="product_href"
-                           class="btn btn-sm btn-danger" title="This product is unpublished.">Unpublished</a>
                         <span class="total_product" style="display:none;">
                             TOTAL: <span
                                 t-esc="abs(product_template['order_line_product_tmlp_total'])"
@@ -433,5 +431,22 @@
 
     </template>
 
+    <template id="cart_popover" inherit_id="website_sale.cart_popover" name="Ilmin Cart Popover">
+        <xpath expr='//div[hasclass("cart_line")]' position="replace">
 
+            <div class="form-row mb8 cart_line">
+                <div class="col-12">
+                    <div>
+                        <t t-call="website_sale.cart_line_product_link">
+                            <span class="h6" t-esc="line.name_short"/>
+                        </t>
+                    </div>
+                    Qty: <t
+                        t-esc="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty"/>
+                </div>
+            </div>
+
+        </xpath>
+
+    </template>
 </odoo>
