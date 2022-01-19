@@ -17,7 +17,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         var product_price = parseFloat(frm.find('.product_variant_price').find(".oe_currency_value").text());
         var $input = frm.find('input[name="add_qty"]')
         var line_id = frm.parent().parent().parent().find('input[name="line_id"]').attr("value");
-        var $qtyNavBar = $(".my_cart_quantity");
+        var $qtyNavBar = $(".my_cart_qty");
         var $amountNavBar = $(".my_cart_amount");
         var data = {cart_quantity:parseFloat($qtyNavBar.text() || 0),cart_total:parseFloat($amountNavBar.text() || 0)};
         var min = parseFloat($input.data("min") || 0);
@@ -113,7 +113,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $amountNavBar.html(result.cart_amount_total)
                    $input.parent().addClass('invisible');
                    $trash.addClass('invisible');
-                                      $ineTotal.html(result.line_total)
+                   $ineTotal.html(result.line_total)
                    $productTmplineTotal.html(result.product_tmlp_total)
 
 
@@ -127,5 +127,38 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
 
     });
+
+    $(".my_cart_icon").click(function (ev) {
+        $(".cart_ilmin").toggle('slow')
+    })
+
+     $("input[name='pickadresse']").click(function (ev) {
+         var $old = $('.shippement_selected');
+        $old.removeClass('shippement_selected');
+
+        var $new = $(ev.currentTarget).closest('.card');
+        $new.addClass('shippement_selected');
+         $("#address_on_payment").toggle('show')
+        $("#cart_lines_ilmin").toggle('show')
+        $(".cart_ilmin_footer").toggle('show')
+    })
+
+    $("#choose_address").click(function (ev) {
+        $("#address_on_payment").toggle('show')
+        $("#cart_lines_ilmin").toggle('show')
+        $(".cart_ilmin_footer").toggle('show')
+
+    })
+
+  $("#add_adress").click(function (ev) {
+        $("#ilmin_add_edit_adress").toggle('show')
+    })
+
+    $("#create_new_address").click(function (ev) {
+        $("#ilmin_add_edit_adress").toggle('show')
+        $("#address_on_payment").toggle('show')
+        $("#cart_lines_ilmin").toggle('show')
+        $(".cart_ilmin_footer").toggle('show')
+    })
 
 });
