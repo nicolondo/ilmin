@@ -335,7 +335,7 @@
                                         <li class="nav-item mr-3">
                                             <span t-field="line.price_subtotal" style="white-space: nowrap;"
                                                   t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
-                                                  />
+                                            />
                                         </li>
                                     </ul>
                                 </div>
@@ -419,10 +419,10 @@
 
     <template id="ilmin_add_edit_adress" name="ilmin Add Edit Adress">
 
-
+        <form id="form_add_adress">
             <div class="form-row">
                 <div t-attf-class="form-group col-lg-12 div_name">
-                    <input type="text" name="name" placeholder="name"
+                    <input type="text" name="name" placeholder="name" required="1"
                            t-attf-class="form-control"
                            t-att-value="'name' in checkout and checkout['name']"/>
                 </div>
@@ -430,19 +430,19 @@
                 <div t-attf-class="form-group col-lg-6"
                      id="div_email">
 
-                    <input type="email" name="email" placeholder="email"
+                    <input type="email" name="email" placeholder="email" required="1"
                            t-attf-class="form-control"
                            t-att-value="'email' in checkout and checkout['email']"/>
                 </div>
                 <div t-attf-class="form-group col-lg-6"
                      id="div_phone">
-                    <input type="tel" name="phone" placeholder="phone"
+                    <input type="tel" name="phone" placeholder="phone" required="1"
                            t-attf-class="form-control"
                            t-att-value="'phone' in checkout and checkout['phone']"/>
                 </div>
                 <div class="w-100"/>
                 <div t-attf-class="form-group col-lg-12 div_street">
-                    <input type="text" name="street" placeholder="street"
+                    <input type="text" name="street" placeholder="street" required="1"
                            t-attf-class="form-control"
                            t-att-value="'street' in checkout and checkout['street']"/>
                 </div>
@@ -456,26 +456,26 @@
                    t-value='country and [x for x in country.get_address_fields() if x in ["zip", "city"]] or ["city", "zip"]'/>
                 <t t-if="'zip' in zip_city and zip_city.index('zip') &lt; zip_city.index('city')">
                     <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-4 div_zip">
-                        <input type="text" name="zip" placeholder="zip"
+                        <input type="text" name="zip" placeholder="zip" required="1"
                                t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}"
                                t-att-value="'zip' in checkout and checkout['zip']"/>
                     </div>
                 </t>
                 <div t-attf-class="form-group col-md-8 div_city">
-                    <input type="text" name="city" placeholder="city"
+                    <input type="text" name="city" placeholder="city" required="1"
                            t-attf-class="form-control"
                            t-att-value="'city' in checkout and checkout['city']"/>
                 </div>
                 <t t-if="'zip' in zip_city and zip_city.index('zip') &gt; zip_city.index('city')">
                     <div t-attf-class="form-group col-md-4 div_zip">
-                        <input type="text" name="zip" placeholder="zip"
+                        <input type="text" name="zip" placeholder="zip" required="1"
                                t-attf-class="form-control"
                                t-att-value="'zip' in checkout and checkout['zip']"/>
                     </div>
                 </t>
                 <div class="w-100"/>
                 <div t-attf-class="form-group col-lg-6 div_country">
-                    <select id="country_id" name="country_id"
+                    <select id="country_id" name="country_id" required="1"
                             t-attf-class="form-control"
                     >
                         <option value="">Country...</option>
@@ -505,19 +505,18 @@
 
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
             <input type="hidden" name="submitted" value="1"/>
-            <input type="hidden" name="partner_id" t-att-value="partner_id or '0'"/>
+            <input type="hidden" name="contact_id" value=""/>
+
+            <input type="hidden" name="partner_id" t-att-value="website_sale_order.partner_id.id or ''"/>
             <input type="hidden" name="callback" t-att-value="callback"/>
-            <!-- Example -->
-            <input type="hidden" name="field_required" t-att-value="'phone,name'"/>
 
             <div class="justify-content-between">
-                <a role="button" id="create_new_address"
-                   class="btn btn-secondary mb32 float-right">
-                    <span>Confirm</span>
-                </a>
+                <input role="button" type="submit"
+                       class="btn btn-secondary mb32 float-right" value="Confirm"/>
+
 
             </div>
-
+        </form>
 
     </template>
     <template id="address_kanban_ilmin" inherit_id="website_sale.address_kanban" name="Kanban address Ilmin">
@@ -526,12 +525,13 @@
             <div t-att-class="'card shippement_selected'  if selected else 'card'">
                 <div class='card-body card-body-shipping' style='min-height: 130px;'>
                     <div class="pickadressediv">
-                        <input class="form-check-input" t-att-checked="selected" type="radio" name="pickadresse" id="radioNoLabel1" value=""
+                        <input class="form-check-input" t-att-checked="selected" type="radio" name="pickadresse"
+                               id="radioNoLabel1" value=""
                                aria-label="sds"/>
                         <label for="pickadresse"></label>
                     </div>
                     <t t-esc="contact" t-options="dict(widget='contact', fields=['name', 'address'], no_marker=True)"/>
-                    <a class="ml-auto no-decoration span_vertical" href="/shop/checkout"> Edit</a>
+                    <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address" t-att-data-contact-id="contact.id" > Edit</a>
 
                 </div>
             </div>
@@ -546,13 +546,14 @@
             <div class="card-body" id="shipping_and_billing">
                 <t t-set="same_shipping"
                    t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
-                <div>
-                    <span t-esc="website_sale_order.partner_id"
+                <div class="col-8">
+                    <span t-esc="website_sale_order.partner_id" id="selected_adress_value"
                           t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')"
                           class="address-inline"/>
                 </div>
-                <a class="float-right no-decoration" id="choose_address"> Edit</a>
-
+                <div class="col-4">
+                    <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address"> Edit</a>
+                </div>
             </div>
         </div>
         <div class="card">

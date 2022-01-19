@@ -197,9 +197,10 @@ body{
     background-color: transparent !important;
     color:#FFFFFF !important;
     border-radius: 15px !important;
-    max-width: 50px !important;
-    width: 50px  !important;
+    max-width: 65px !important;
+    width: 65px  !important;
     font-size: 12px;
+    text-align: center;
 
 }
 .js_cart_lines tr{
@@ -221,6 +222,7 @@ body{
     font-size: 12px;
     line-height: 13px;
     padding-bottom: 5px;
+    text-align: -webkit-center;
 }
 
 
@@ -231,8 +233,8 @@ body{
 
 .cart_ilmin{
     position: absolute;
-    width: 657px;
-    height: 1024px;
+    width: 543px;
+    height: 95vh;
     top: 0px;
     right: 0px;
 
@@ -259,9 +261,26 @@ body{
     margin-top: 10px;
 }
 .cart_ilmin_footer{
-    bottom: 14%;
+    bottom: 0;
     position: absolute;
+    min-width: 100%;
 }
+.span_underlined{
+    text-decoration: underline !important;
+    font-size: 16px;
+    line-height: 18px;
+    color: white !important;
+}
+span.o_force_ltr
+{
+    color:#616161 !important;
+}
+
+span[itemprop="name"] {
+    color: #CD9F54 !important;
+    font-weight:bold;
+}
+
 .table th, .table td {
 
     border-color: rgba(215, 178, 107, 0.2);

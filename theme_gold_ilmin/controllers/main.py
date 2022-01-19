@@ -167,9 +167,7 @@ class WebsiteSale(WebsiteSale):
             else:
                 layout_mode = 'grid'
 
-
         Country = request.env['res.country']
-
 
         values = {
             'search': fuzzy_search_term or search,
@@ -221,5 +219,73 @@ class WebsiteSale(WebsiteSale):
                 set_qty=set_qty,
 
             )
+        else:
+            return False
+
+    @http.route(['/shop/cart/getcontact_info'], type='json', auth="public", methods=['GET', 'POST'], website=True,
+                csrf=False)
+    def getcontact_info(self, contact_id,
+                        **kw):
+        """This route is called when adding a product to cart (no options)."""
+        """This route is called when adding a product to cart (no options)."""
+
+        contact = request.env['res.partner'].browse(int(contact_id))
+        if contact:
+            data = {
+                'contact_id': contact.id,
+                'name': contact.name,
+                'email': contact.email,
+                'phone': contact.phone,
+                'street': contact.street,
+                'street2': contact.street2,
+                'zip': contact.zip,
+                'country_id': contact.country_id,
+                'city': contact.city,
+            }
+            return data
+        else:
+            return False
+
+    @http.route(['/shop/cart/create_contacts'], type='json', auth="public", methods=['GET', 'POST'], website=True,
+                csrf=False)
+    def create_contacts(self, data, **kw):
+        """This route is called when adding a product to cart (no options)."""
+        """This route is called when adding a product to cart (no options)."""
+
+        Contact = request.env['res.partner']
+        if (data['contact_id']):
+            contact = Contact.browse(int(data['contact_id']))
+            data = {
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'street': data['street'],
+                'street2': data['street2'],
+                'zip': data['zip'],
+                'country_id': int(data['country_id']),
+                'city': data['city'],
+            }
+
+            contact.write(data)
+
+        else:
+
+            data = {
+                'type': 'delivery',
+                'parent_id': int(data['partner_id']),
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'street': data['street'],
+                'street2': data['street2'],
+                'zip': data['zip'],
+                'country_id': int(data['country_id']),
+                'city': data['city'],
+            }
+
+            contact = Contact.create(data)
+
+        if contact:
+            return True
         else:
             return False
