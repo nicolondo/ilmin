@@ -335,7 +335,7 @@
                                         <li class="nav-item mr-3">
                                             <span t-field="line.price_subtotal" style="white-space: nowrap;"
                                                   t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
-                                                  groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                  />
                                         </li>
                                     </ul>
                                 </div>
