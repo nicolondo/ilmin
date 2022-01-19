@@ -66,6 +66,20 @@ class SaleOrder(models.Model):
             'order_line_product_tmlp_total': order_line_product_tmlp_total,
         }
 
+    def _get_order_product_tpml(self,order_id=None):
+        order =  self.env['sale.order'].browse(order_id)
+        product_tmpl_order_lines = order.order_line.product_template_id
+        return product_tmpl_order_lines
+
+
+    def _get_order_line_by_tpml(self,order_id=None,product_templ_id=None):
+        order =  self.env['sale.order'].browse(order_id)
+        product_tmpl_order_lines = order.order_line.filtered(
+            lambda l: l.product_id.product_tmpl_id.id == product_templ_id)
+
+        return product_tmpl_order_lines
+
+
     def _get_product_tmlp_info(self,order_id=None,product_templ_id=None):
         order =  self.env['sale.order'].browse(order_id)
         product =  self.env['product.template'].browse(product_templ_id)
@@ -80,4 +94,18 @@ class SaleOrder(models.Model):
             'order_line_product_tmlp_total': order_line_product_tmlp_total,
         }
 
+
+    def _get_shippings(self,partner_id=None):
+        partner = self.env['res.partner'].browse(partner_id)
+
+        shippings = []
+        if partner_id :
+            Partner = partner.with_context(show_address=1).sudo()
+            shippings = Partner.search([
+                ("id", "child_of",partner.commercial_partner_id.ids),
+                '|', ("type", "in", ["delivery", "other"]), ("id", "=", partner.commercial_partner_id.id)
+            ], order='id desc')
+
+
+        return shippings
 

@@ -4,6 +4,7 @@
               name="Ilmin Template Header Default" active="True">
         <xpath expr='//t[@t-call="website.placeholder_header_call_to_action"]' position="replace">
         </xpath>
+
     </template>
 
     <template id="website_sale.header_cart_link">
@@ -22,12 +23,18 @@
                      t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
             </a>
         </li>
+                    <t t-call="other-template"/>
+
     </template>
 
+    <template id="other-template" name="Ilmin Cart" active="True">
+        <p>ssssssssssssssssssssssssss</p>
+    </template>
 
     <template id="products" inherit_id="website_sale.products" name="Ilmin Products">
         <xpath expr='//t[@t-call="website_sale.pricelist_list"]' position="replace">
         </xpath>
+
     </template>
 
     <template id="website_sale.products_item">
