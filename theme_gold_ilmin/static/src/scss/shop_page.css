@@ -197,9 +197,10 @@ body{
     background-color: transparent !important;
     color:#FFFFFF !important;
     border-radius: 15px !important;
-    max-width: 50px !important;
-    width: 50px  !important;
+    max-width: 65px !important;
+    width: 65px  !important;
     font-size: 12px;
+    text-align: center;
 
 }
 .js_cart_lines tr{
@@ -221,6 +222,7 @@ body{
     font-size: 12px;
     line-height: 13px;
     padding-bottom: 5px;
+    text-align: -webkit-center;
 }
 
 
@@ -231,8 +233,8 @@ body{
 
 .cart_ilmin{
     position: absolute;
-    width: 657px;
-    height: 1024px;
+    width: 543px;
+    height: 100vh;
     top: 0px;
     right: 0px;
 
@@ -246,6 +248,7 @@ body{
     padding: 9px;
     height: 64px;
 }
+
 .cart_ilmin_header > span{
     font-weight: bold;
     font-size: 18px;
@@ -253,15 +256,32 @@ body{
     position: relative;
     top: 32%;
 }
+.cart_ilmin_body {
 
+    overflow-y: scroll;
+    height:75%;
+}
 .cart_ilmin_header > img{
     float:right;
     margin-top: 10px;
 }
-.cart_ilmin_footer{
-    bottom: 14%;
-    position: absolute;
+
+.span_underlined{
+    text-decoration: underline !important;
+    font-size: 16px;
+    line-height: 18px;
+    color: white !important;
 }
+span.o_force_ltr
+{
+    color:#616161 !important;
+}
+
+span[itemprop="name"] {
+    color: #CD9F54 !important;
+    font-weight:bold;
+}
+
 .table th, .table td {
 
     border-color: rgba(215, 178, 107, 0.2);

@@ -4,6 +4,15 @@ import json
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.addons.website.controllers.main import QueryURL
 from odoo.addons.website_sale.controllers.main import TableCompute
+from odoo.addons.web.controllers import main
+
+
+class Home(main.Home):
+
+    def _login_redirect(self, uid, redirect=None):
+        if not redirect and not request.env['res.users'].sudo().browse(uid).has_group('base.group_user'):
+            redirect = '/shop'
+        return super(Home, self)._login_redirect(uid, redirect=redirect)
 
 
 class WebsiteSale(WebsiteSale):
@@ -25,7 +34,7 @@ class WebsiteSale(WebsiteSale):
         '''/shop/page/<int:page>''',
         '''/shop/category/<model("product.public.category"):category>''',
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
-    ], type='http', auth="public", website=True, sitemap=sitemap_shop)
+    ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
         add_qty = int(post.get('add_qty', 1))
         try:
@@ -167,9 +176,7 @@ class WebsiteSale(WebsiteSale):
             else:
                 layout_mode = 'grid'
 
-
         Country = request.env['res.country']
-
 
         values = {
             'search': fuzzy_search_term or search,
@@ -223,3 +230,90 @@ class WebsiteSale(WebsiteSale):
             )
         else:
             return False
+
+    @http.route(['/shop/cart/getcontact_info'], type='json', auth="public", methods=['GET', 'POST'], website=True,
+                csrf=False)
+    def getcontact_info(self, contact_id,
+                        **kw):
+        """This route is called when adding a product to cart (no options)."""
+        """This route is called when adding a product to cart (no options)."""
+
+        contact = request.env['res.partner'].browse(int(contact_id))
+        if contact:
+            data = {
+                'contact_id': contact.id,
+                'name': contact.name,
+                'email': contact.email,
+                'phone': contact.phone,
+                'street': contact.street,
+                'street2': contact.street2,
+                'zip': contact.zip,
+                'country_id': contact.country_id,
+                'city': contact.city,
+            }
+            return data
+        else:
+            return False
+
+    @http.route(['/shop/cart/create_contacts'], type='json', auth="public", methods=['GET', 'POST'], website=True,
+                csrf=False)
+    def create_contacts(self, data, **kw):
+        """This route is called when adding a product to cart (no options)."""
+        """This route is called when adding a product to cart (no options)."""
+
+        Contact = request.env['res.partner']
+        if (data['contact_id']):
+            contact = Contact.browse(int(data['contact_id']))
+            data = {
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'street': data['street'],
+                'street2': data['street2'],
+                'zip': data['zip'],
+                'country_id': int(data['country_id']),
+                'city': data['city'],
+            }
+
+            contact.write(data)
+
+        else:
+
+            data = {
+                'type': 'delivery',
+                'parent_id': int(data['partner_id']),
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'street': data['street'],
+                'street2': data['street2'],
+                'zip': data['zip'],
+                'country_id': int(data['country_id']),
+                'city': data['city'],
+            }
+
+            contact = Contact.create(data)
+
+        if contact:
+            return True
+        else:
+            return False
+
+    @http.route(['/shop/cart/shop_confirm_order'], type='json', auth="public", website=True, sitemap=False)
+    def shop_confirm_order(self,contact_id, **post):
+        order = request.website.sale_get_order()
+        data={'success':False}
+        if(contact_id):
+            order.partner_shipping_id = int(contact_id)
+        order.onchange_partner_shipping_id()
+        order.order_line._compute_tax_id()
+        order.action_confirm()
+        if order and order.state != 'draft':
+            request.session['sale_order_id'] = False
+            request.session['website_sale_current_pl'] = False
+            order = request.website.sale_get_order()
+            data['url'] =  request.httprequest.host_url+"shop"
+            data['success'] = True
+            data['order_name'] = order.name
+
+        return data

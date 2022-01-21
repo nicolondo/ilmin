@@ -138,27 +138,82 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
         var $new = $(ev.currentTarget).closest('.card');
         $new.addClass('shippement_selected');
-         $("#address_on_payment").toggle('show')
+        var new_street = $new.find("address").find('span.w-100').html()
+        var regex = /<br\s*[\/]?>/gi;
+        $("#selected_adress_value").html('<span class="w-100 o_force_ltr d-block" itemprop="streetAddress">'.concat(new_street).concat('</span>'))
+
+
+
+        $("#address_on_payment").toggle('show')
         $("#cart_lines_ilmin").toggle('show')
-        $(".cart_ilmin_footer").toggle('show')
+
+
+
+
     })
 
     $("#choose_address").click(function (ev) {
         $("#address_on_payment").toggle('show')
         $("#cart_lines_ilmin").toggle('show')
-        $(".cart_ilmin_footer").toggle('show')
 
     })
 
   $("#add_adress").click(function (ev) {
         $("#ilmin_add_edit_adress").toggle('show')
+
     })
 
-    $("#create_new_address").click(function (ev) {
-        $("#ilmin_add_edit_adress").toggle('show')
-        $("#address_on_payment").toggle('show')
-        $("#cart_lines_ilmin").toggle('show')
-        $(".cart_ilmin_footer").toggle('show')
+    $("#form_add_adress").submit(function (ev) {
+        var unindexed_array  = $('#form_add_adress').serializeArray();
+        var formData = {};
+
+            $.map(unindexed_array, function(n, i){
+                formData[n['name']] = n['value'];
+            });
+
+        ajax.jsonRpc('/shop/cart/create_contacts', 'call',{'data':formData}).then(function(data) {
+           if(data){
+
+               $("#ilmin_add_edit_adress").toggle('show')
+                $("#address_on_payment").toggle('show')
+                $("#cart_lines_ilmin").toggle('show')
+                $(".cart_ilmin_footer").toggle('show')
+           }
+        });
+
+
     })
+
+    $(".edit_address").click(function (ev) {
+
+        ajax.jsonRpc('/shop/cart/getcontact_info', 'call',{'contact_id':$(this).attr("data-contact-id")}).then(function(data) {
+           if(data){
+               $.each(data, function(key, value){
+                    if(value){
+                        $("#form_add_adress").find('input[name='+key+']').val(value)
+                    }else{
+                        $("#form_add_adress").find('input[name='+key+']').val(" ")
+                    }
+                });
+                $("#ilmin_add_edit_adress").toggle('show')
+            }
+        });
+    })
+
+
+
+    $("#finalise-btn").click(function (ev) {
+        var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
+        ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
+           if(data['success']){
+                alert(data['order_name'])
+                window.location.replace(data['url'])
+          }else{
+            alert('oreder not created')
+          }
+        });
+    })
+
+
 
 });
