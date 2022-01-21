@@ -425,7 +425,7 @@
 
     <template id="ilmin_add_edit_adress" name="ilmin Add Edit Adress">
 
-        <form id="form_add_adress">
+        <form id="form_add_adress" method="post" >
             <div class="form-row">
                 <div t-attf-class="form-group col-lg-12 div_name">
                     <input type="text" name="name" placeholder="name" required="1"
