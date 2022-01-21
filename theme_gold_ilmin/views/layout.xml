@@ -2,12 +2,18 @@
 
 <odoo>
 
-
     <template id="template_header_default" inherit_id="website.template_header_default"
               name="Ilmin Template Header Default" active="True">
 
         <xpath expr='//t[@t-call="website.placeholder_header_call_to_action"]' position="replace">
         </xpath>
+        <xpath expr='//t[@t-call="website.placeholder_header_brand"]' position="replace">
+            <a href="/shop" t-attf-class="navbar-brand logo ml-4">
+                <span t-field="website.logo" t-options="{'widget': 'image'}" role="img"
+                      t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
+            </a>
+        </xpath>
+
 
         <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
             <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
@@ -15,7 +21,7 @@
             <span t-attf-class="ml-lg-auto d-none d-lg-inline text-muted nav-link my_cart_qty"
                   t-esc="website_sale_order.cart_quantity or '0'"/>
             <span t-attf-class="d-none d-lg-inline text-muted nav-link">
-                Items-</span>
+                Items</span>
 
             <span t-attf-class="d-none d-lg-inline font-weight-bold text-muted nav-link my_cart_amount"
                   t-esc="website_sale_order.amount_total"
@@ -531,7 +537,8 @@
                         <label for="pickadresse"></label>
                     </div>
                     <t t-esc="contact" t-options="dict(widget='contact', fields=['name', 'address'], no_marker=True)"/>
-                    <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address" t-att-data-contact-id="contact.id" > Edit</a>
+                    <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address"
+                       t-att-data-contact-id="contact.id"> Edit</a>
 
                 </div>
             </div>
@@ -552,7 +559,8 @@
                           class="address-inline"/>
                 </div>
                 <div class="col-4">
-                    <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address"> Edit</a>
+                    <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
+                        Edit</a>
                 </div>
             </div>
         </div>
@@ -575,7 +583,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-
 
                     <button class="btn float-right " id="finalise-btn">CONFIRM ORDER</button>
                 </div>

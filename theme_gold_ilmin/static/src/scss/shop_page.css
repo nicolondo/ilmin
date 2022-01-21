@@ -234,7 +234,7 @@ body{
 .cart_ilmin{
     position: absolute;
     width: 543px;
-    height: 95vh;
+    height: 100vh;
     top: 0px;
     right: 0px;
 
@@ -248,6 +248,7 @@ body{
     padding: 9px;
     height: 64px;
 }
+
 .cart_ilmin_header > span{
     font-weight: bold;
     font-size: 18px;
@@ -255,16 +256,16 @@ body{
     position: relative;
     top: 32%;
 }
+.cart_ilmin_body {
 
+    overflow-y: scroll;
+    height:75%;
+}
 .cart_ilmin_header > img{
     float:right;
     margin-top: 10px;
 }
-.cart_ilmin_footer{
-    bottom: 0;
-    position: absolute;
-    min-width: 100%;
-}
+
 .span_underlined{
     text-decoration: underline !important;
     font-size: 16px;

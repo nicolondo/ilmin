@@ -146,7 +146,6 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
         $("#address_on_payment").toggle('show')
         $("#cart_lines_ilmin").toggle('show')
-        $(".cart_ilmin_footer").toggle('show')
 
 
 
@@ -156,7 +155,6 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     $("#choose_address").click(function (ev) {
         $("#address_on_payment").toggle('show')
         $("#cart_lines_ilmin").toggle('show')
-        $(".cart_ilmin_footer").toggle('show')
 
     })
 
@@ -187,6 +185,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     })
 
     $(".edit_address").click(function (ev) {
+
         ajax.jsonRpc('/shop/cart/getcontact_info', 'call',{'contact_id':$(this).attr("data-contact-id")}).then(function(data) {
            if(data){
                $.each(data, function(key, value){
@@ -200,5 +199,21 @@ odoo.define('ilmin_theme.website_shop', function (require) {
             }
         });
     })
+
+
+
+    $("#finalise-btn").click(function (ev) {
+        var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
+        ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
+           if(data['success']){
+                alert(data['order_name'])
+                window.location.replace(data['url'])
+          }else{
+            alert('oreder not created')
+          }
+        });
+    })
+
+
 
 });
