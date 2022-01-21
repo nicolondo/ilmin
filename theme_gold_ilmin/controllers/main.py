@@ -36,6 +36,12 @@ class WebsiteSale(WebsiteSale):
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
     ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
+
+        order = request.website.sale_get_order()
+        if order and order.state != 'draft':
+            request.session['sale_order_id'] = None
+            order = request.website.sale_get_order()
+
         add_qty = int(post.get('add_qty', 1))
         try:
             min_price = float(min_price)
@@ -255,7 +261,7 @@ class WebsiteSale(WebsiteSale):
         else:
             return False
 
-    @http.route(['/shop/cart/create_contacts'], type='json', auth="public", methods=['GET', 'POST'], website=True,
+    @http.route(['/shop/cart/create_contacts'], type='json', auth="public", methods=['POST'], website=True,
                 csrf=False)
     def create_contacts(self, data, **kw):
         """This route is called when adding a product to cart (no options)."""
@@ -275,7 +281,7 @@ class WebsiteSale(WebsiteSale):
                 'city': data['city'],
             }
 
-            contact.write(data)
+            contact.sudo().write(data)
 
         else:
 
@@ -292,7 +298,7 @@ class WebsiteSale(WebsiteSale):
                 'city': data['city'],
             }
 
-            contact = Contact.create(data)
+            contact = Contact.sudo().create(data)
 
         if contact:
             return True
@@ -309,9 +315,6 @@ class WebsiteSale(WebsiteSale):
         order.order_line._compute_tax_id()
         order.action_confirm()
         if order and order.state != 'draft':
-            request.session['sale_order_id'] = False
-            request.session['website_sale_current_pl'] = False
-            order = request.website.sale_get_order()
             data['url'] =  request.httprequest.host_url+"shop"
             data['success'] = True
             data['order_name'] = order.name
