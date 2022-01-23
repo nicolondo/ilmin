@@ -134,7 +134,9 @@ body{
 ;
     max-height: fit-content;
 }
-
+.form-control{
+    color:#DEDBE7 !important;
+}
 .popover-header, .popover-body {
 
   background-color: #000000;
@@ -319,6 +321,9 @@ span[itemprop="name"] {
 
     width: 30px;
 
+}
+li.nav-item:last-child {
+    text-align: right;
 }
 @media (min-width: 1200px){
 

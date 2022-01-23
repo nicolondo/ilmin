@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-
+    <template id="login_layout" inherit_id="website.login_layout" name="Login Layout ilmin">
+        <xpath expr="t" position="replace">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'loginpage'"/>
+                <div class="oe_website_login_container" t-out="0"/>
+            </t>
+        </xpath>
+    </template>
     <template id="template_header_default" inherit_id="website.template_header_default"
               name="Ilmin Template Header Default" active="True">
 
         <xpath expr='//t[@t-call="website.placeholder_header_call_to_action"]' position="replace">
         </xpath>
         <xpath expr='//t[@t-call="website.placeholder_header_brand"]' position="replace">
-            <a href="/shop" t-attf-class="navbar-brand logo ml-4">
+            <a t-if="pageName != 'loginpage'" href="/shop" t-attf-class="navbar-brand logo ml-4">
                 <span t-field="website.logo" t-options="{'widget': 'image'}" role="img"
                       t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
             </a>
@@ -281,6 +288,7 @@
 
 
     <template id="login" inherit_id="web.login" name="Login Inherit">
+
         <xpath expr="//label[@for='login']" position="replace">
         </xpath>
         <xpath expr="//label[@for='password']" position="replace">
@@ -425,7 +433,7 @@
 
     <template id="ilmin_add_edit_adress" name="ilmin Add Edit Adress">
 
-        <form id="form_add_adress" method="post" >
+        <form id="form_add_adress" method="post">
             <div class="form-row">
                 <div t-attf-class="form-group col-lg-12 div_name">
                     <input type="text" name="name" placeholder="name" required="1"

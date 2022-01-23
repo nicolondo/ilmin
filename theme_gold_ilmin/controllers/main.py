@@ -1,4 +1,4 @@
-from odoo import http, tools, api, _
+from odoo import http,fields, tools, api, _
 from odoo.http import request
 import json
 from odoo.addons.website_sale.controllers.main import WebsiteSale
@@ -36,7 +36,7 @@ class WebsiteSale(WebsiteSale):
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
     ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
-
+        post['order'] = "name asc"
         order = request.website.sale_get_order()
         if order and order.state != 'draft':
             request.session['sale_order_id'] = None
