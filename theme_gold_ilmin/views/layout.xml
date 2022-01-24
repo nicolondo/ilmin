@@ -29,15 +29,15 @@
 
             <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
 
-            <span t-attf-class="ml-lg-auto d-none d-lg-inline text-muted nav-link my_cart_qty"
+            <span t-attf-class="ml-lg-auto d-none ml-2 d-lg-inline text-muted nav-link my_cart_qty"
                   t-esc="website_sale_order.cart_quantity or '0'"/>
-            <span t-attf-class="d-none d-lg-inline text-muted nav-link">
+            <span t-attf-class="d-none d-lg-inline ml-2 text-muted nav-link">
                 Items</span>
 
-            <span t-attf-class="d-none d-lg-inline font-weight-bold text-muted nav-link my_cart_amount"
+            <span t-attf-class="d-none d-lg-inline ml-2 font-weight-bold text-muted nav-link my_cart_amount"
                   t-esc="website_sale_order.amount_total"
                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
-            <span t-attf-class="d-none d-lg-inline font-weight-bold text-muted nav-link my_cart_icon">
+            <span t-attf-class="d-none d-lg-inline ml-2 mr-2 font-weight-bold text-muted nav-link my_cart_icon">
                 <img src="/theme_gold_ilmin/static/src/img/shopping-cart.svg"/>
             </span>
 
@@ -55,7 +55,7 @@
         <xpath expr='//t[@t-call="portal.user_dropdown"]' position="replace">
             <t t-call="portal.user_dropdown">
 
-                <t t-set="_user_name" t-value="true"/>
+                <t t-set="_user_name" t-value="false"/>
                 <t t-set="_item_class" t-valuef="nav-item dropdown"/>
                 <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
             </t>
