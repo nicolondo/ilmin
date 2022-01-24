@@ -342,13 +342,16 @@
                                t-as="line">
                                 <div>
                                     <ul class="navbar-nav-cart">
-                                        <li class="nav-item mr-3">
+                                        <li class="nav-item mr-3 ilmin_cart_li_price">
                                             <span class="product_variant_price"
                                                   t-esc="line.product_id.lst_price"
                                                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
-
+                                            <div style="display:none">
+                                                <span
+                                                      t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                            </div>
                                         </li>
-                                        <li class="nav-item mr-3">
+                                        <li class="nav-item mr-3 ilmin_cart_li_variant">
                                             <span
                                                     t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
 
