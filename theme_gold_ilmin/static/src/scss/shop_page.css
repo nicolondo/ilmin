@@ -437,10 +437,18 @@ li.nav-item:last-child {
 
         color:#4A4A4A !important;
     }
-
+    .navbar-nav-cart li{
+        text-align: inherit;
+    }
 
     .cart_ilmin{
-        width: 75%;
+        width: 80%;
+    }
+    .ilmin_cart_li_price>div{
+        display:block !important;
+    }
+    .ilmin_cart_li_variant{
+        display:none !important;
     }
     #top_menu_container{
         display:felx !important;
