@@ -392,14 +392,14 @@ li.nav-item:last-child {
         font-size:0.8rem;
     }
     .td-variant-name{
-        width:28%;
+        width:65%;
         display:inline-grid;
     }
     .td-add-mass{
-        width:41%;
+        width:38%;
     }
      .td-qty{
-        width:30%;
+        width:27%;
     }
      .td-action{
         width:3%;
@@ -445,6 +445,7 @@ li.nav-item:last-child {
     #top_menu{
         flex-direction: row !important;
         font-size :13px;
+        float: right;
     }
    .navbar-brand{
         margin-left :0px !important;
