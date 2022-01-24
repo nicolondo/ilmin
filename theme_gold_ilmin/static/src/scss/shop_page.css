@@ -392,7 +392,7 @@ li.nav-item:last-child {
         font-size:0.8rem;
     }
     .td-variant-name{
-        width:65%;
+        width:100%;
         display:inline-grid;
     }
      .td-variant-name>span:last-child{
