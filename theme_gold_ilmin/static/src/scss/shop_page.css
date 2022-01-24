@@ -134,7 +134,12 @@ body{
 ;
     max-height: fit-content;
 }
-
+.form-control{
+    color:#DEDBE7 !important;
+}
+#alert_order_success,#alert_order_failed {
+    display:none;
+}
 .popover-header, .popover-body {
 
   background-color: #000000;
@@ -231,10 +236,16 @@ body{
     border-color: #252525 !important;
 }
 
+.o_offcanvas_menu_toggler,.o_offcanvas_logo {
+    display:none !important;
+}
+#top_menu>span{
+    display: block !important;
+}
 .cart_ilmin{
     position: absolute;
     width: 575px;
-    height: 100vh;
+    height: 87vh;
     top: 0px;
     right: 0px;
 
@@ -319,6 +330,9 @@ span[itemprop="name"] {
 
     width: 30px;
 
+}
+li.nav-item:last-child {
+    text-align: right;
 }
 @media (min-width: 1200px){
 
@@ -414,6 +428,11 @@ span[itemprop="name"] {
 
         color:#4A4A4A !important;
     }
+
+
+    .cart_ilmin{
+        width: 75%;
+}
 
 }
 
