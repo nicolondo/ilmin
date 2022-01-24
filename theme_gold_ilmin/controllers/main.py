@@ -1,4 +1,4 @@
-from odoo import http,fields, tools, api, _
+from odoo import http, fields, tools, api, _
 from odoo.http import request
 import json
 from odoo.addons.website_sale.controllers.main import WebsiteSale
@@ -227,13 +227,22 @@ class WebsiteSale(WebsiteSale):
             sale_order = request.website.sale_get_order(force_create=True)
 
         if sale_order:
-            return sale_order._cart_update_custom(
+            values = {
+                "website_sale_order": sale_order,
+            }
+
+            result = sale_order._cart_update_custom(
                 order_id=sale_order.id,
                 line_id=int(line_id) if line_id else False,
                 product_id=int(product_id),
                 set_qty=set_qty,
 
             )
+            cart_lines_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_lines_ilmin', values)
+
+            result["cart_lines_ilmin"] = cart_lines_ilmin
+            return result
+
         else:
             return False
 
@@ -266,7 +275,6 @@ class WebsiteSale(WebsiteSale):
     def create_contacts(self, data, **kw):
         """This route is called when adding a product to cart (no options)."""
         """This route is called when adding a product to cart (no options)."""
-
         Contact = request.env['res.partner']
         if (data['contact_id']):
             contact = Contact.browse(int(data['contact_id']))
@@ -301,21 +309,30 @@ class WebsiteSale(WebsiteSale):
             contact = Contact.sudo().create(data)
 
         if contact:
-            return True
+            result = {}
+            order = request.website.sale_get_order()
+            values = {
+                "website_sale_order": order,
+            }
+            all_adress_shipping = request.env['ir.ui.view']._render_template(
+                'theme_gold_ilmin.address_on_payment_ilmin', values)
+            result["all_adress_shipping"] = all_adress_shipping
+
+            return result
         else:
             return False
 
     @http.route(['/shop/cart/shop_confirm_order'], type='json', auth="public", website=True, sitemap=False)
-    def shop_confirm_order(self,contact_id, **post):
+    def shop_confirm_order(self, contact_id, **post):
         order = request.website.sale_get_order()
-        data={'success':False}
-        if(contact_id):
+        data = {'success': False}
+        if (contact_id):
             order.partner_shipping_id = int(contact_id)
         order.onchange_partner_shipping_id()
         order.order_line._compute_tax_id()
         order.action_confirm()
         if order and order.state != 'draft':
-            data['url'] =  request.httprequest.host_url+"shop"
+            data['url'] = request.httprequest.host_url + "shop"
             data['success'] = True
             data['order_name'] = order.name
 

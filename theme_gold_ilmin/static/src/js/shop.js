@@ -18,6 +18,8 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         var $input = frm.find('input[name="add_qty"]')
         var line_id = frm.parent().parent().parent().find('input[name="line_id"]').attr("value");
         var $qtyNavBar = $(".my_cart_qty");
+        var $cart_lines_ilmin= $('#cart_lines_ilmin')
+
         var $amountNavBar = $(".my_cart_amount");
         var data = {cart_quantity:parseFloat($qtyNavBar.text() || 0),cart_total:parseFloat($amountNavBar.text() || 0)};
         var min = parseFloat($input.data("min") || 0);
@@ -42,9 +44,9 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $amountNavBar.html(result.cart_amount_total)
                    $ineTotal.html(result.line_total)
                    $productTmplineTotal.html(result.product_tmlp_total)
-
                    $input.parent().removeClass('invisible');
-                $trash.removeClass('invisible');
+                   $trash.removeClass('invisible');
+                   $cart_lines_ilmin.html(result.cart_lines_ilmin);
 
                 });
             }else{
@@ -57,7 +59,8 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $productTmplineTotal.html(result.product_tmlp_total)
 
                    $input.parent().addClass('invisible');
-                $trash.addClass('invisible');
+                    $trash.addClass('invisible');
+                   $cart_lines_ilmin.html(result.cart_lines_ilmin);
 
                 });
 
@@ -83,6 +86,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
                    $input.parent().removeClass('invisible');
                     $trash.removeClass('invisible');
+                   $cart_lines_ilmin.html(result.cart_lines_ilmin);
 
                 });
             }else{
@@ -96,6 +100,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
                    $input.parent().addClass('invisible');
                    $trash.addClass('invisible');
+                   $cart_lines_ilmin.html(result.cart_lines_ilmin);
 
                 });
 
@@ -115,6 +120,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $trash.addClass('invisible');
                    $ineTotal.html(result.line_total)
                    $productTmplineTotal.html(result.product_tmlp_total)
+                   $cart_lines_ilmin.html(result.cart_lines_ilmin);
 
 
                 });
@@ -132,7 +138,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         $(".cart_ilmin").toggle('slow')
     })
 
-     $("input[name='pickadresse']").click(function (ev) {
+    $("#all_adress_shipping").on("click", "input[name='pickadresse']", function(ev){
          var $old = $('.shippement_selected');
         $old.removeClass('shippement_selected');
 
@@ -158,12 +164,12 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
     })
 
-  $("#add_adress").click(function (ev) {
+    $("#all_adress_shipping").on("click", "#add_adress", function(ev){
         $("#ilmin_add_edit_adress").toggle('show')
 
     })
 
-    $("#form_add_adress").submit(function (ev) {
+    $("#add_edit_adress_btn").click(function (ev) {
         var unindexed_array  = $('#form_add_adress').serializeArray();
         var formData = {};
 
@@ -175,9 +181,9 @@ odoo.define('ilmin_theme.website_shop', function (require) {
            if(data){
 
                $("#ilmin_add_edit_adress").toggle('show')
-                $("#address_on_payment").toggle('show')
-                $("#cart_lines_ilmin").toggle('show')
-                $(".cart_ilmin_footer").toggle('show')
+                $("#all_adress_shipping").html(data.all_adress_shipping)
+
+
            }
         });
 
@@ -206,10 +212,14 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
         ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
            if(data['success']){
-                alert(data['order_name'])
+                var alert = $('#alert_order_success')
+                alert.find('#order_alert').text(data['order_name']);
+                alert.toggle('show')
+
                 window.location.replace(data['url'])
           }else{
-            alert('oreder not created')
+                var alert = $('#alert_order_failed')
+                alert.toggle('show')
           }
         });
     })
