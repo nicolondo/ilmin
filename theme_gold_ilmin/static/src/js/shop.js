@@ -19,6 +19,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         var line_id = frm.parent().parent().parent().find('input[name="line_id"]').attr("value");
         var $qtyNavBar = $(".my_cart_qty");
         var $cart_lines_ilmin= $('#cart_lines_ilmin')
+        var $cart_sammury_ilmin= $('#cart_sammury_ilmin')
 
         var $amountNavBar = $(".my_cart_amount");
         var data = {cart_quantity:parseFloat($qtyNavBar.text() || 0),cart_total:parseFloat($amountNavBar.text() || 0)};
@@ -47,6 +48,8 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $input.parent().removeClass('invisible');
                    $trash.removeClass('invisible');
                    $cart_lines_ilmin.html(result.cart_lines_ilmin);
+                   $cart_sammury_ilmin.html(result.cart_sammury_ilmin);
+
 
                 });
             }else{
@@ -61,6 +64,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $input.parent().addClass('invisible');
                     $trash.addClass('invisible');
                    $cart_lines_ilmin.html(result.cart_lines_ilmin);
+                   $cart_sammury_ilmin.html(result.cart_sammury_ilmin);
 
                 });
 
@@ -87,6 +91,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $input.parent().removeClass('invisible');
                     $trash.removeClass('invisible');
                    $cart_lines_ilmin.html(result.cart_lines_ilmin);
+                   $cart_sammury_ilmin.html(result.cart_sammury_ilmin);
 
                 });
             }else{
@@ -101,6 +106,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $input.parent().addClass('invisible');
                    $trash.addClass('invisible');
                    $cart_lines_ilmin.html(result.cart_lines_ilmin);
+                   $cart_sammury_ilmin.html(result.cart_sammury_ilmin);
 
                 });
 
@@ -121,6 +127,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
                    $ineTotal.html(result.line_total)
                    $productTmplineTotal.html(result.product_tmlp_total)
                    $cart_lines_ilmin.html(result.cart_lines_ilmin);
+                   $cart_sammury_ilmin.html(result.cart_sammury_ilmin);
 
 
                 });
@@ -157,19 +164,19 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
 
     })
-
-    $("#choose_address").click(function (ev) {
+    $("#cart_sammury_ilmin").on("click", "#choose_address", function(ev){
         $("#address_on_payment").toggle('show')
         $("#cart_lines_ilmin").toggle('show')
 
     })
 
     $("#all_adress_shipping").on("click", "#add_adress", function(ev){
+        $('#form_add_adress')[0].reset()
         $("#ilmin_add_edit_adress").toggle('show')
 
     })
 
-    $("#add_edit_adress_btn").click(function (ev) {
+    $("#ilmin_add_edit_adress").on("click", "#add_edit_adress_btn", function(ev){
         var unindexed_array  = $('#form_add_adress').serializeArray();
         var formData = {};
 
@@ -189,9 +196,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
 
     })
-
-    $(".edit_address").click(function (ev) {
-
+    $("#all_adress_shipping").on("click", ".edit_address", function(ev){
         ajax.jsonRpc('/shop/cart/getcontact_info', 'call',{'contact_id':$(this).attr("data-contact-id")}).then(function(data) {
            if(data){
                $.each(data, function(key, value){
@@ -207,8 +212,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     })
 
 
-
-    $("#finalise-btn").click(function (ev) {
+    $("#cart_sammury_ilmin").on("click", "#finalise-btn", function(ev){
         var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
         ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
            if(data['success']){

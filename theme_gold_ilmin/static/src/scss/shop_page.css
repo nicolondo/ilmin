@@ -241,6 +241,7 @@ body{
 }
 #top_menu>span{
     display: block !important;
+    color: white !important;
 }
 .cart_ilmin{
     position: absolute;
@@ -259,7 +260,12 @@ body{
     padding: 9px;
     height: 64px;
 }
-
+#top_menu_collapse{
+    display:block !important;
+}
+button.navbar-toggler{
+    display: none !important;
+}
 .cart_ilmin_header > span{
     font-weight: bold;
     font-size: 18px;
@@ -432,7 +438,20 @@ li.nav-item:last-child {
 
     .cart_ilmin{
         width: 75%;
-}
+    }
+    #top_menu_container{
+        display:felx !important;
+    }
+    #top_menu{
+        flex-direction: row !important;
+        font-size :13px;
+    }
+   .navbar-brand{
+        margin-left :0px !important;
+    }
+    .navbar-collapse{
+        flex-basis: fit-content !important;
+    }
 
 }
 

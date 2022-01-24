@@ -239,8 +239,11 @@ class WebsiteSale(WebsiteSale):
 
             )
             cart_lines_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_lines_ilmin', values)
+            cart_sammury_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_sammury_ilmin', values)
 
             result["cart_lines_ilmin"] = cart_lines_ilmin
+            result["cart_sammury_ilmin"] = cart_sammury_ilmin
+
             return result
 
         else:
