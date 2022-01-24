@@ -395,6 +395,9 @@ li.nav-item:last-child {
         width:65%;
         display:inline-grid;
     }
+     .td-variant-name>span:last-child{
+        font-size:10px;
+    }
     .td-add-mass{
         width:38%;
     }
