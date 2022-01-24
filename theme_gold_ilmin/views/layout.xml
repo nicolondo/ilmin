@@ -348,7 +348,7 @@
                                                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                                             <div style="display:none">
                                                 <span
-                                                      t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                                        t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
                                             </div>
                                         </li>
                                         <li class="nav-item mr-3 ilmin_cart_li_variant">
@@ -574,45 +574,57 @@
 
     <template id="cart_sammury_ilmin" name="Ilmin cart summary">
         <div class="card">
-            <div class="card-body" id="shipping_and_billing">
+            <div class="card-body row" id="shipping_and_billing">
                 <t t-set="same_shipping"
                    t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
-                <div class="col-8">
+                <div class="col-md-8">
                     <span t-esc="website_sale_order.partner_id" id="selected_adress_value"
                           t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')"
                           class="address-inline"/>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
                         Edit</a>
                 </div>
             </div>
         </div>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body row">
+                    <div class="col-md-6" id="total_summary_desktop">
+                        <span class="span-gold total_product">
+                            TOTAL: </span>
+                        <div>
+                            <span class="font-weight-bold span-gold"
+                                  t-esc="abs(website_sale_order.amount_total)"
+                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                            <span class="font-weight-bold span-gold total_product">
+                                | </span>
+                            <span class="font-weight-bold span-gold total_product"
+                                  t-esc="website_sale_order.cart_quantity or '0'"/>
+                            <span class="font-weight-bold span-gold total_product">
+                                PCS </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
 
-                <div class="col-md-6">
-                    <span class="span-gold total_product">
-                        TOTAL: </span>
-                    <div>
-                        <span class="font-weight-bold span-gold"
-                              t-esc="abs(website_sale_order.amount_total)"
-                              t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
-                        <span class="font-weight-bold span-gold total_product">
-                            | </span>
-                        <span class="font-weight-bold span-gold total_product"
-                              t-esc="website_sale_order.cart_quantity or '0'"/>
-                        <span class="font-weight-bold span-gold total_product">
-                            PCS </span>
+                        <button class="btn " id="finalise-btn">CONFIRM ORDER</button>
+                    </div>
+                    <div class="col-md-6" style="text-align:center;display:none;" id="total_summary_phone">
+                        <div>
+                            <span class="span-gold">
+                                TOTAL: </span>
+                            <span class="font-weight-bold span-gold"
+                                  t-esc="abs(website_sale_order.amount_total)"
+                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        </div>
+                        <div>
+                            <span class="font-weight-bold span-gold"
+                                  t-esc="website_sale_order.cart_quantity or '0'"/>
+                            <span class="font-weight-bold span-gold">
+                                PCS </span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-
-                    <button class="btn float-right " id="finalise-btn">CONFIRM ORDER</button>
-                </div>
-
-
-            </div>
         </div>
 
     </template>
