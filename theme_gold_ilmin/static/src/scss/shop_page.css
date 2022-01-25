@@ -399,6 +399,10 @@ li.nav-item:last-child {
     }
     .item_variant_hidden{
         display:block !important;
+        font-size: 10px;
+    }
+    .item_variant_hidden{
+        white-space: nowrap;
     }
     .total_product{
         display: block !important;
