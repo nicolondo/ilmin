@@ -443,6 +443,9 @@ li.nav-item:last-child {
 
 
     }
+    .card-body-shipping>address{
+        text-align:center;
+    }
 
 
 }
