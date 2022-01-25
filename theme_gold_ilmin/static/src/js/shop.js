@@ -10,10 +10,10 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     $(".quick_add_to_cart").unbind().click(function (ev) {
         ev.preventDefault();
         var $aSubmit = $(ev.currentTarget);
-        var frm = $aSubmit.closest('tr');
+        var frm = $aSubmit.closest('ul');
         var parent = $aSubmit.closest('.card-body');
         var $trash = frm.find('.action-trash');
-        var product_product = frm.parent().parent().parent().find('input[name="product_id"]').attr("value");
+        var product_product = frm.parent().find('input[name="product_id"]').attr("value");
         var product_price = parseFloat(frm.find('.product_variant_price').find(".oe_currency_value").text());
         var $input = frm.find('input[name="add_qty"]')
         var line_id = frm.parent().parent().parent().find('input[name="line_id"]').attr("value");
@@ -35,6 +35,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
             var quantity =add_qty + previousQty;
             var add_amount =add_qty * product_price;
             var newQty = quantity > min ? (quantity < max ? quantity : max) : min;
+
 
             if (newQty !== previousQty & newQty > 0) {
 
