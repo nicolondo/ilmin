@@ -403,6 +403,15 @@ li.nav-item:last-child {
     }
     .item_variant_hidden{
         white-space: nowrap;
+        font-size: 9px;
+
+    }
+    .item_mass_add {
+        text-align:end;
+    }
+    .product_name{
+      font-size: 15px;
+
     }
     .total_product{
         display: block !important;
