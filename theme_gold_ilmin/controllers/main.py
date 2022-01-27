@@ -36,6 +36,7 @@ class WebsiteSale(WebsiteSale):
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
     ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
+        ppg =100
         post['order'] = "name asc"
         order = request.website.sale_get_order()
         if order and order.state != 'draft':
