@@ -197,6 +197,14 @@ odoo.define('ilmin_theme.website_shop', function (require) {
          $(".o_searchbar_form").submit()
     })
 
+    $("body").mouseup(function(e){
+        var container = $(".cart_ilmin");
+
+        // If the target of the click isn't the container
+        if(!container.is(e.target) && container.has(e.target).length === 0){
+            container.hide();
+        }
+    });
 
     $("#ilmin_add_edit_adress").on("click", "#add_edit_adress_btn", function(ev){
         var unindexed_array  = $('#form_add_adress').serializeArray();
