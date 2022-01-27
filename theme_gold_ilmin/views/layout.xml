@@ -31,7 +31,7 @@
 
             <span t-attf-class="ml-lg-auto d-none ml-2 d-lg-inline text-muted nav-link my_cart_qty"
                   t-esc="website_sale_order.cart_quantity or '0'"/>
-            <span t-attf-class="d-none d-lg-inline ml-2 text-muted nav-link">
+            <span t-attf-class="d-none d-lg-inline ml-2 text-muted nav-link my_cart_items">
                 Items</span>
 
             <span t-attf-class="d-none d-lg-inline ml-2 font-weight-bold text-muted nav-link my_cart_amount"
@@ -110,12 +110,13 @@
                        t-value="website_sale_order._get_line_info(order_id=website_sale_order.id, product_id=variant_id.id)"/>
                     <input type="hidden" name="product_id" t-att-value="variant_id.id"/>
                     <ul class="nav  row text-center " id="productlist">
-                        <li class="nav-item item_product_list item_product_price col-2 col-md"><span class="product_variant_price"
-                                                                t-esc="abs(combination_info['price'])"
-                                                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <li class="nav-item item_product_list item_product_price col-2 col-md"><span
+                                class="product_variant_price"
+                                t-esc="abs(combination_info['price'])"
+                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
 
-                        <span class="d-none item_variant_hidden"
-                                t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/>
+                            <span class="d-none item_variant_hidden"
+                                  t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/>
                         </li>
                         <li class="nav-item item_product_list item_variant col-2 col-md"><span
                                 t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/></li>
@@ -137,7 +138,8 @@
                             </button>
 
                         </span></li>
-                        <li class="nav-item item_product_list item_qty_add col-2 col-md" style="display:inline-flex;"><div
+                        <li class="nav-item item_product_list item_qty_add col-2 col-md"
+                            style="display:inline-flex;"><div
                                 t-att-class="'css_quantity input-group mx-auto justify-content-center invisible'  if line_info['order_line_product_qty'] == 0 else 'css_quantity input-group mx-auto justify-content-center'"
                                 t-if="product.visible_qty_configurator">
                             <div class="input-group-prepend">
@@ -541,6 +543,17 @@
             </div>
         </div>
 
+    </template>
+
+    <template id="website_search_box_imin" inherit_id="website.website_search_box" name="website search box ilmin">
+        <xpath expr="//div[hasclass('input-group-append')]" position="replace">
+            <div class="input-group-append">
+                <button type="submit" t-att-class="'btn oe_search_button %s' % (_submit_classes or 'btn-primary')"
+                        aria-label="Search" title="Search"><i class="fa fa-search"/></button>
+                <button id="clear_search" class="btn btn-primary"><i class="fa fa-times"></i></button>
+
+            </div>
+        </xpath>
     </template>
 
 

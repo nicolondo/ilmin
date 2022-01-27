@@ -2,7 +2,6 @@
     font-family: "Copperplate Gothic";
     src: url("/theme_gold_ilmin/static/src/fonts/Copperplate_Gothic_Regular.ttf") format("truetype");
 }
-
 body,.btn, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 ,.navbar-brand, .navbar-text, .navbar .nav-link, .navbar a.js_change_lang span, .navbar a.o_add_language {
     font-family: "Copperplate Gothic" !important;
 
@@ -342,6 +341,18 @@ li.nav-item:last-child {
     text-align: right;
 }
 
+.o_footer_copyright{
+    display:none;
+}
+main{
+ background:#000000;
+}
+
+.o_portal_docs>a,.o_portal_my_doc_table,.o_portal_wrap .o_portal_navbar{
+    background-color: #000000 !important;
+    color: #CD9F54 !important;
+    border-color: rgba(215, 178, 107, 0.2) !important;
+}
 
 @media (min-width: 1390px){
 
@@ -354,6 +365,10 @@ li.nav-item:last-child {
     .o_wsale_product_information_text{
         width:90%;
     }
+     .product_name,.item_total_line {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -363,6 +378,7 @@ li.nav-item:last-child {
     .js_add_cart_json_ilmin,.js_delete_product_ilmin{
         padding:0.5rem !important;
     }
+
 
 }
 @media (max-width: 960px) {
