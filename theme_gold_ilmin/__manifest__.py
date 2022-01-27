@@ -12,6 +12,7 @@
         # 'views/images_library.xml',
         'views/layout.xml',
         'views/portal_my_account.xml',
+        'views/product.xml',
 
         # 'views/snippets/s_cover.xml',
         # 'views/snippets/s_features.xml',
