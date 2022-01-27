@@ -9,7 +9,7 @@ class ThemeGoldIlmin(models.AbstractModel):
         self.disable_view('website_sale.filter_products_price')
         self.enable_view('website_sale.products_list_view')
         self.disable_view('website_sale.add_grid_or_list_option')
-        self.disable_view('portal.my_account_link')
+        self.enable_view('portal.my_account_link')
 
 
 

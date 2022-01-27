@@ -145,7 +145,22 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     $(".my_cart_icon").click(function (ev) {
         $(".cart_ilmin").toggle('slow')
     })
+    $(".my_cart_qty").click(function (ev) {
+        $(".cart_ilmin").toggle('slow')
+    })
+    $(".my_cart_amount").click(function (ev) {
+        $(".cart_ilmin").toggle('slow')
+    })
+    $(".my_cart_items").click(function (ev) {
+        $(".cart_ilmin").toggle('slow')
+    })
 
+
+     $(document).on('click',function(e){
+        if(!(($(e.target).closest("#modalBox").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
+        $("#modalBox").hide();
+       }
+      })
     $("#all_adress_shipping").on("click", "input[name='pickadresse']", function(ev){
          var $old = $('.shippement_selected');
         $old.removeClass('shippement_selected');
@@ -176,6 +191,12 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         $("#ilmin_add_edit_adress").toggle('show')
 
     })
+
+    $("#clear_search").click(function (ev) {
+         $(".oe_search_box").val('')
+         $(".o_searchbar_form").submit()
+    })
+
 
     $("#ilmin_add_edit_adress").on("click", "#add_edit_adress_btn", function(ev){
         var unindexed_array  = $('#form_add_adress').serializeArray();
@@ -212,21 +233,23 @@ odoo.define('ilmin_theme.website_shop', function (require) {
         });
     })
 
-
     $("#cart_sammury_ilmin").on("click", "#finalise-btn", function(ev){
-        var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
-        ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
-           if(data['success']){
-                var alert = $('#alert_order_success')
-                alert.find('#order_alert').text(data['order_name']);
-                alert.toggle('show')
+        var proceed = confirm("You are about to your order,press Yes to continue or No to continue shipping.");
+            if(proceed)  {
+            var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
+            ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
+               if(data['success']){
+                    var alert = $('#alert_order_success')
+                    alert.find('#order_alert').text(data['order_name']);
+                    alert.toggle('show')
 
-                window.location.replace(data['url'])
-          }else{
-                var alert = $('#alert_order_failed')
-                alert.toggle('show')
-          }
-        });
+                    window.location.replace(data['url'])
+              }else{
+                    var alert = $('#alert_order_failed')
+                    alert.toggle('show')
+              }
+            });
+        }
     })
 
 

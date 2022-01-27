@@ -6,11 +6,12 @@
     'sequence': 130,
     'version': '1.0.0',
     'author': 'Afrez Solutions',
-    'depends': ['website', 'website_sale','portal'],
+    'depends': ['website', 'website_sale','portal','sale','account'],
     'data': [
         # 'data/ir_asset.xml',
         # 'views/images_library.xml',
         'views/layout.xml',
+        'views/portal_my_account.xml',
 
         # 'views/snippets/s_cover.xml',
         # 'views/snippets/s_features.xml',
