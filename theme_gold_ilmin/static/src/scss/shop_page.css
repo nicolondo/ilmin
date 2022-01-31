@@ -542,7 +542,7 @@ main{
     }
 
     .cart_ilmin{
-        width: 80%;
+        width: 43vh;
     }
     .ilmin_cart_li_price>div{
         display:block !important;
