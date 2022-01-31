@@ -242,7 +242,7 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     })
 
     $("#cart_sammury_ilmin").on("click", "#finalise-btn", function(ev){
-        var proceed = confirm("You are about to your order,press Yes to continue or No to continue shipping.");
+        var proceed = confirm('CONFIRMACION Estas a punto de confirmar tu orden, éste paso no tiene vuelta atrás !');
             if(proceed)  {
             var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
             ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {

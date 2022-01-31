@@ -17,8 +17,9 @@ h1, h2, h3, h4, h5, h6{
     margin: 50px auto;
     text-align:center;
 }
-
-
+.o_portal_sidebar #sidebar_content.card > ul > li {
+    background-color: inherit !important;
+}
 .oe_website_login_container {
     border: solid 10px;
     border-color: #D6B777;
@@ -212,6 +213,9 @@ body{
     border-bottom: 1px solid #51492F;
 
 }
+.o_search_result_item{
+    dispaly:none !important;
+}
 .navbar-nav-cart{
 
     width: 100%;
@@ -219,7 +223,9 @@ body{
     display: table;
 
 }
-
+#introduction{
+    background-color: inherit !important;
+}
 .navbar-nav-cart li {
    display: table-cell;
    font-style: normal;
@@ -231,7 +237,7 @@ body{
 }
 
 
-.oe_search_box, input,select{
+.oe_search_box, input,select,textarea{
     background-color: #252525 !important;
     border-color: #252525 !important;
 }
@@ -276,7 +282,7 @@ button.navbar-toggler{
 .cart_ilmin_body {
 
     overflow-y: scroll;
-    height:75%;
+    height:68%;
 }
 .cart_ilmin_header > img{
     float:right;

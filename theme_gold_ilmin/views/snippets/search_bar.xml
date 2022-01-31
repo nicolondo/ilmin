@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+        <t t-extend="website.s_searchbar.autocomplete">
+                <t t-jquery=".search-query" t-operation="attributes">
+                        <attribute name="autocomplete">off</attribute>
+                </t>
+        </t>
+</templates>
