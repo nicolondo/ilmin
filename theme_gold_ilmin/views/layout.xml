@@ -457,8 +457,8 @@
             <input type="hidden" name="callback" t-att-value="callback"/>
 
             <div class="justify-content-between">
-                <input role="button" id="add_edit_adress_btn"
-                       class="btn btn-secondary mb32 float-right" value="Confirm"/>
+                <button id="add_edit_adress_btn"
+                        class="btn btn-secondary mb32 float-right" >Confirmar</button>
 
 
             </div>
@@ -478,7 +478,7 @@
                     </div>
                     <t t-esc="contact" t-options="dict(widget='contact', fields=['name', 'address'], no_marker=True)"/>
                     <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address"
-                       t-att-data-contact-id="contact.id"> Edit</a>
+                       t-att-data-contact-id="contact.id"> EDITAR</a>
 
                 </div>
             </div>
@@ -491,6 +491,7 @@
     <template id="cart_sammury_ilmin" name="Ilmin cart summary">
         <div class="card">
             <div class="card-body row" id="shipping_and_billing">
+                <div class="span-gold">DIRECCIÓN DE ENVIO</div>
                 <t t-set="same_shipping"
                    t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
                 <div class="col-md-8">
@@ -500,7 +501,7 @@
                 </div>
                 <div class="col-md-4">
                     <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
-                        Edit</a>
+                        EDITAR</a>
                 </div>
             </div>
         </div>
@@ -523,7 +524,7 @@
                 </div>
                 <div class="col-md-6">
 
-                    <button class="btn " id="finalise-btn">CONFIRM ORDER</button>
+                    <button class="btn " id="finalise-btn">FINALIZAR ORDEN</button>
                 </div>
                 <div class="col-md-6" style="text-align:center;display:none;" id="total_summary_phone">
                     <div>
