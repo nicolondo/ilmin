@@ -282,7 +282,7 @@ button.navbar-toggler{
 .cart_ilmin_body {
 
     overflow-y: scroll;
-    height:68%;
+    height:50%;
 }
 .cart_ilmin_header > img{
     float:right;
