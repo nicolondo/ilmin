@@ -485,6 +485,9 @@ main{
 
 
     }
+    .cart_ilmin{
+        width: 420px;
+    }
 }
 
 @media (max-width: 420px) {
@@ -541,9 +544,7 @@ main{
         text-align: inherit;
     }
 
-    .cart_ilmin{
-        width: 43vh;
-    }
+
     .ilmin_cart_li_price>div{
         display:block !important;
         font-size: 9px;
