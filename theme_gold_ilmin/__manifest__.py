@@ -14,7 +14,7 @@
         'views/portal_my_account.xml',
         'views/product.xml',
 
-        # 'views/snippets/s_cover.xml',
+        # 'views/snippets/search_bar.xml',
         # 'views/snippets/s_features.xml',
         # 'views/snippets/s_image_text.xml',
         # 'views/snippets/s_text_image.xml',
