@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+
+    <template id="login_layout" inherit_id="website.login_layout" name="Login Layout ilmin">
+        <xpath expr="t" position="replace">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'loginpage'"/>
+                <div class="oe_website_login_container" t-out="0"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="template_header_default" inherit_id="website.template_header_default"
+              name="Ilmin Template Header Default" active="True">
+
+        <xpath expr='//t[@t-call="website.placeholder_header_call_to_action"]' position="replace">
+        </xpath>
+        <xpath expr='//t[@t-call="website.placeholder_header_brand"]' position="replace">
+            <a t-if="pageName != 'loginpage'" href="/shop" t-attf-class="navbar-brand logo ml-4">
+                <span t-field="website.logo" t-options="{'widget': 'image'}" role="img"
+                      t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
+            </a>
+        </xpath>
+
+
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+
+
+            <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+
+            <span t-attf-class="ml-lg-auto d-none ml-2 d-lg-inline text-muted nav-link my_cart_qty"
+                  t-esc="website_sale_order.cart_quantity or '0'"/>
+            <span t-attf-class="d-none d-lg-inline ml-2 text-muted nav-link my_cart_items">
+                Items</span>
+
+            <span t-attf-class="d-none d-lg-inline ml-2 font-weight-bold text-muted nav-link my_cart_amount"
+                  t-esc="website_sale_order.amount_total"
+                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
+            <span t-attf-class="d-none d-lg-inline ml-2 mr-2 font-weight-bold text-muted nav-link my_cart_icon">
+                <img src="/theme_gold_ilmin/static/src/img/shopping-cart.svg"/>
+            </span>
+
+
+        </xpath>
+
+        <xpath expr='//t[@t-call="portal.placeholder_user_sign_in"]' position="replace">
+            <t t-call="portal.placeholder_user_sign_in">
+                <t t-set="_item_class" t-valuef="nav-item"/>
+                <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
+            </t>
+            <t t-call="theme_gold_ilmin.cart_ilmin"/>
+
+        </xpath>
+        <xpath expr='//t[@t-call="portal.user_dropdown"]' position="replace">
+            <t t-call="portal.user_dropdown">
+
+                <t t-set="_user_name" t-value="false"/>
+                <t t-set="_item_class" t-valuef="nav-item dropdown"/>
+                <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
+            </t>
+        </xpath>
+
+    </template>
+
+
+    <template id="no_footer" inherit_id="website.layout">
+        <xpath expr="//div[@id='footer']" position="replace">
+        </xpath>
+    </template>
+
+
+    <template id="products_item" name="Ilmimn Products Item">
+
+        <t t-set="product_href"
+           t-value="keep(product.website_url, page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))"/>
+
+        <t t-set="combination_info"
+           t-value="product._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+        <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+
+        <t t-set="product_template"
+           t-value="website_sale_order._get_product_tmlp_info(order_id=website_sale_order.id, product_templ_id=product.id)"/>
+        <a class="o_product_link css_editable_mode_hidden" t-att-href="product_href"/>
+        <div class="card-body p-0 pb-3">
+            <div class="p-0 product_name">
+
+                <span class="span_vertical span-gold"
+                      t-esc="product.name"/>
+                <span class="total_product" style="display:none;">
+                    TOTAL: <span
+                        t-esc="abs(product_template['order_line_product_tmlp_total'])"
+                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                </span>
+
+
+            </div>
+
+            <div class="p-0 o_wsale_product_information_text">
+                <t t-set="attribute_exclusions"
+                   t-value="product._get_attribute_exclusions()"/>
+                <t t-set="filtered_sorted_variants" t-value="product._get_possible_variants_sorted()"/>
+                <div t-foreach="filtered_sorted_variants" t-as="variant_id"
+                     class="p-1">
+                    <t t-set="template_combination_info"
+                       t-value="product._get_combination_info(only_template=True, add_qty=add_qty, pricelist=pricelist)"/>
+                    <t t-set="combination_info"
+                       t-value="variant_id._get_combination_info_variant(add_qty=add_qty, pricelist=pricelist)"/>
+                    <t t-set="line_info"
+                       t-value="website_sale_order._get_line_info(order_id=website_sale_order.id, product_id=variant_id.id)"/>
+                    <input type="hidden" name="product_id" t-att-value="variant_id.id"/>
+                    <ul class="nav  row text-center " id="productlist">
+                        <li class="nav-item item_product_list item_product_price col-2 col-md"><span
+                                class="product_variant_price"
+                                t-esc="abs(combination_info['price'])"
+                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+
+                            <span class="d-none item_variant_hidden"
+                                  t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/>
+                        </li>
+                        <li class="nav-item item_product_list item_variant col-2 col-md"><span
+                                t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/></li>
+                        <li class="nav-item item_product_list item_mass_add col-4 col-md"><span>
+                            <button
+                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                    aria-label="Add one" title="Add one" t-attf-qty="1">
+                                +1
+                            </button>
+                            <button
+                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                    aria-label="Add Three" title="Add Three" t-attf-qty="3">
+                                +3
+                            </button>
+                            <button
+                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                    aria-label="Add Six" title="Add Six" t-attf-qty="6">
+                                +6
+                            </button>
+
+                        </span></li>
+                        <li class="nav-item item_product_list item_qty_add col-2 col-md"
+                            style="display:inline-flex;"><div
+                                t-att-class="'css_quantity input-group mx-auto justify-content-center invisible'  if line_info['order_line_product_qty'] == 0 else 'css_quantity input-group mx-auto justify-content-center'"
+                                t-if="product.visible_qty_configurator">
+                            <div class="input-group-prepend">
+                                <button t-attf-href="#"
+                                        class="btn btn-primary js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
+                                        aria-label="Remove one" title="Remove one">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="js_quantity form-control quantity"
+                                   data-min="0" name="add_qty"
+                                   t-att-value="line_info['order_line_product_qty'] or 0"
+                            />
+                            <div></div>
+                            <div class="input-group-append">
+                                <button t-attf-href="#"
+                                        class="btn btn-primary float_left js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
+                                        aria-label="Add one" title="Add one">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                            <span
+                                    t-att-class="'action-trash invisible'  if line_info['order_line_product_qty'] == 0 else 'action-trash'">
+                                <a href='#' aria-label="Remove from cart"
+                                   title="Remove from cart"
+                                   class='js_delete_product_ilmin no-decoration quick_add_to_cart'><big><i
+                                        class='fa fa-trash-o'></i></big></a>
+                            </span></li>
+                        <li class="nav-item  item_product_list item_total_line col-2 col-md"><span
+                                class="line_total_price"
+                                t-esc="abs(line_info['order_line_product_total']) or 0"
+                                t-options='{
+                                                   "widget": "monetary",
+                                                   "display_currency": product.currency_id,
+                                               }'/></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <t t-set="bg_color" t-value="td_product['ribbon']['bg_color'] or ''"/>
+        <t t-set="text_color" t-value="td_product['ribbon']['text_color']"/>
+        <t t-set="bg_class" t-value="td_product['ribbon']['html_class']"/>
+        <span t-attf-class="o_ribbon #{bg_class}"
+              t-attf-style="#{text_color and ('color: %s; ' % text_color)}#{bg_color and 'background-color:' + bg_color}"
+              t-out="td_product['ribbon']['html'] or ''"/>
+    </template>
+
+
+    <template id="products" inherit_id="website_sale.products" name="Ilmin Products">
+        <xpath expr='//t[@t-call="website_sale.pricelist_list"]' position="replace">
+        </xpath>
+
+
+        <xpath expr='//t[@t-call="website_sale.products_item"]' position="replace">
+            <t t-call="theme_gold_ilmin.products_item">
+            </t>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_wsale_product_grid_wrapper')]" position="attributes">
+            <attribute name="t-attf-class" remove="o_wsale_product_grid_wrapper" separator=" "/>
+        </xpath>
+    </template>
+
+
+    <template id="login" inherit_id="web.login" name="Login Inherit">
+
+        <xpath expr="//label[@for='login']" position="replace">
+        </xpath>
+        <xpath expr="//label[@for='password']" position="replace">
+        </xpath>
+        <xpath expr="//form[@class='oe_login_form']" position="before">
+            <div class="logo_login">
+                <div>
+                    <img src="/theme_gold_ilmin/static/src/img/parfum.svg"/>
+
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+
+    <template id="cart_lines_ilmin" name="Ilmin cart lines">
+        <div t-if="not website_sale_order or not website_sale_order.website_order_line"
+             class="js_cart_lines alert alert-info">
+            Your cart is empty!
+        </div>
+        <div class="alert alert-info" id="alert_order_success" role="status">
+            <p>Order <span class="span-gold font-weight-bold " id="order_alert"> SOOOO1 </span> successfuly created</p>
+        </div>
+
+
+        <div class="alert alert-danger" id="alert_order_failed" role="status">
+            <p>Error while creating the sale order, please try again</p>
+        </div>
+
+        <table class="mb16 table table-striped table-sm js_cart_lines" id="cart_products"
+               t-if="website_sale_order and website_sale_order.website_order_line">
+
+            <t t-set="product_templates_ids"
+               t-value="website_sale_order._get_order_product_tpml(order_id=website_sale_order.id)"/>
+
+            <tbody>
+                <t t-foreach="product_templates_ids" t-as="product_tmpl_id">
+                    <tr>
+                        <td class='td-product_name'>
+                            <div>
+                                <span class="span-gold" t-esc="product_tmpl_id.name"/>
+                            </div>
+                            <t t-set="tmpl_product_line_ids"
+                               t-value="website_sale_order._get_order_line_by_tpml(order_id=website_sale_order.id,product_templ_id=product_tmpl_id.id)"/>
+                            <t t-foreach="tmpl_product_line_ids"
+                               t-as="line">
+                                <div>
+                                    <ul class="navbar-nav-cart">
+                                        <li class="nav-item mr-3 ilmin_cart_li_price">
+                                            <span class="product_variant_price"
+                                                  t-esc="line.product_id.lst_price"
+                                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                            <div style="display:none">
+                                                <span
+                                                        t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item mr-3 ilmin_cart_li_variant">
+                                            <span
+                                                    t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+
+                                        </li>
+                                        <li class="nav-item mr-3">
+                                            <input type="text" class="js_quantity_cart form-control quantity"
+                                                   data-min="0" name="add_qty"
+                                                   t-att-value="line.product_uom_qty or 0"
+                                            />
+                                        </li>
+                                        <li class="nav-item mr-3">
+                                            <span t-field="line.price_subtotal" style="white-space: nowrap;"
+                                                  t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                                            />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                        </td>
+
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+
+    </template>
+
+
+    <template id="cart_ilmin" name="Ilmin Cart" active="True">
+        <div class="cart_ilmin">
+            <div class="cart_ilmin_header">
+                <span>SHOPPING CART</span>
+                <img class="my_cart_icon" src="/theme_gold_ilmin/static/src/img/shopping-cart.svg"/>
+            </div>
+            <div class="cart_ilmin_body pl-2">
+                <div id='cart_lines_ilmin'>
+
+                    <t t-call="theme_gold_ilmin.cart_lines_ilmin"/>
+                </div>
+                <div id='address_on_payment' style="display:none;">
+                    <t t-call="website_sale.address_on_payment"/>
+                </div>
+            </div>
+
+            <div class="cart_ilmin_footer">
+
+                <div id="cart_sammury_ilmin">
+                    <t t-call="theme_gold_ilmin.cart_sammury_ilmin"/>
+                </div>
+            </div>
+
+        </div>
+
+    </template>
+
+    <template id="address_on_payment_ilmin" inherit_id="website_sale.address_on_payment" name="Ilmin addres on payment">
+        <xpath expr="//div[hasclass('card')]" position="replace">
+            <t t-set='shippings' t-value="website_sale_order._get_shippings(website_sale_order.partner_id.id)"/>
+
+            <div id="all_adress_shipping">
+                <div class="col-lg-12">
+                    <div class="row mt8">
+
+                        <t t-foreach="shippings" t-as="ship">
+                            <div class="col-md-12 col-lg-12 one_kanban mb-2">
+                                <t t-call="website_sale.address_kanban">
+                                    <t t-set='contact' t-value="ship"/>
+                                    <t t-set='selected' t-value="bool(website_sale_order.partner_shipping_id==ship)"/>
+                                    <t t-set='readonly' t-value="bool(len(shippings)==1)"/>
+                                    <t t-set='edit_billing' t-value="bool(ship==website_sale_order.partner_id)"/>
+                                    <t t-set="allow_edit"
+                                       t-value="not website_sale_order.partner_id or (ship.id in website_sale_order.partner_id.child_ids.ids)"/>
+                                </t>
+                            </div>
+                        </t>
+                        <div class="col-md-12 col-lg-12 one_kanban">
+                            <a role="button" href="#" id="add_adress" class=' btn span-gold float-right mb-2 '>
+                                <i class="fa fa-plus-square"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ilmin_add_edit_adress" class="card p-2" style="display:none;">
+                <t t-call="theme_gold_ilmin.ilmin_add_edit_adress">
+                    <t t-set="checkout" t-valuef=""/>
+                </t>
+            </div>
+        </xpath>
+
+
+    </template>
+
+
+    <template id="ilmin_add_edit_adress" name="ilmin Add Edit Adress">
+
+        <form id="form_add_adress" method="post">
+            <div class="form-row">
+                <div t-attf-class="form-group col-lg-12 div_name">
+                    <input type="text" name="name" placeholder="name" required="1"
+                           t-attf-class="form-control"
+                           t-att-value="'name' in checkout and checkout['name']"/>
+                </div>
+                <div class="w-100"/>
+                <div t-attf-class="form-group col-lg-6"
+                     id="div_email">
+
+                    <input type="email" name="email" placeholder="email" required="1"
+                           t-attf-class="form-control"
+                           t-att-value="'email' in checkout and checkout['email']"/>
+                </div>
+                <div t-attf-class="form-group col-lg-6"
+                     id="div_phone">
+                    <input type="tel" name="phone" placeholder="phone" required="1"
+                           t-attf-class="form-control"
+                           t-att-value="'phone' in checkout and checkout['phone']"/>
+                </div>
+                <div class="w-100"/>
+                <div t-attf-class="form-group col-lg-12 div_street">
+                    <input type="text" name="street" placeholder="street" required="1"
+                           t-attf-class="form-control"
+                           t-att-value="'street' in checkout and checkout['street']"/>
+                </div>
+                <div t-attf-class="form-group col-lg-12 div_street2">
+                    <input type="text" name="street2" placeholder="street2"
+                           t-attf-class="form-control"
+                           t-att-value="'street2' in checkout and checkout['street2']"/>
+                </div>
+                <div class="w-100"/>
+                <t t-set='zip_city'
+                   t-value='country and [x for x in country.get_address_fields() if x in ["zip", "city"]] or ["city", "zip"]'/>
+                <t t-if="'zip' in zip_city and zip_city.index('zip') &lt; zip_city.index('city')">
+                    <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-4 div_zip">
+                        <input type="text" name="zip" placeholder="zip" required="1"
+                               t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}"
+                               t-att-value="'zip' in checkout and checkout['zip']"/>
+                    </div>
+                </t>
+                <div t-attf-class="form-group col-md-8 div_city">
+                    <input type="text" name="city" placeholder="city" required="1"
+                           t-attf-class="form-control"
+                           t-att-value="'city' in checkout and checkout['city']"/>
+                </div>
+                <t t-if="'zip' in zip_city and zip_city.index('zip') &gt; zip_city.index('city')">
+                    <div t-attf-class="form-group col-md-4 div_zip">
+                        <input type="text" name="zip" placeholder="zip" required="1"
+                               t-attf-class="form-control"
+                               t-att-value="'zip' in checkout and checkout['zip']"/>
+                    </div>
+                </t>
+                <div class="w-100"/>
+                <div t-attf-class="form-group col-lg-6 div_country">
+                    <select id="country_id" name="country_id" required="1"
+                            t-attf-class="form-control"
+                    >
+                        <option value="">Country...</option>
+                        <t t-foreach="countries" t-as="c">
+                            <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1)">
+                                <t t-esc="c.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                <div t-attf-class="form-group col-lg-6 div_state"
+                     t-att-style="(not country or not country.state_ids) and 'display: none'">
+                    <select name="state_id"
+                            t-attf-class="form-control"
+                            data-init="1">
+                        <option value="">State / Province...</option>
+                        <t t-foreach="country_states" t-as="s">
+                            <option t-att-value="s.id"
+                                    t-att-selected="s.id == ('state_id' in checkout and country and checkout['state_id'] != '' and int(checkout['state_id']))">
+                                <t t-esc="s.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                <div class="w-100"/>
+            </div>
+
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="submitted" value="1"/>
+            <input type="hidden" name="contact_id" value=""/>
+
+            <input type="hidden" name="partner_id" t-att-value="website_sale_order.partner_id.id or ''"/>
+            <input type="hidden" name="callback" t-att-value="callback"/>
+
+            <div class="justify-content-between">
+                <button id="add_edit_adress_btn"
+                        class="btn btn-secondary mb32 float-right" >Confirmar</button>
+
+
+            </div>
+        </form>
+
+    </template>
+    <template id="address_kanban_ilmin" inherit_id="website_sale.address_kanban" name="Kanban address Ilmin">
+
+        <xpath expr="//div[contains(@t-attf-class, 'card')]" position="replace">
+            <div t-att-class="'card shippement_selected'  if selected else 'card'">
+                <div class='card-body card-body-shipping' style='min-height: 130px;'>
+                    <div class="pickadressediv">
+                        <input class="form-check-input" t-att-checked="selected" type="radio" name="pickadresse"
+                               id="radioNoLabel1" value=""
+                               aria-label="sds"/>
+                        <label for="pickadresse"></label>
+                    </div>
+                    <t t-esc="contact" t-options="dict(widget='contact', fields=['name', 'address'], no_marker=True)"/>
+                    <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address"
+                       t-att-data-contact-id="contact.id"> EDITAR</a>
+
+                </div>
+            </div>
+        </xpath>
+
+
+    </template>
+
+
+    <template id="cart_sammury_ilmin" name="Ilmin cart summary">
+        <div class="card">
+            <div class="card-body row" id="shipping_and_billing">
+                <div class="span-gold">DIRECCIÓN DE ENVIO</div>
+                <t t-set="same_shipping"
+                   t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
+                <div class="col-md-8">
+                    <span t-esc="website_sale_order.partner_id" id="selected_adress_value"
+                          t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')"
+                          class="address-inline"/>
+                </div>
+                <div class="col-md-4">
+                    <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
+                        EDITAR</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-md-6" id="total_summary_desktop">
+                    <span class="span-gold total_product">
+                        TOTAL: </span>
+                    <div>
+                        <span class="font-weight-bold span-gold"
+                              t-esc="abs(website_sale_order.amount_total)"
+                              t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <span class="font-weight-bold span-gold total_product">
+                            | </span>
+                        <span class="font-weight-bold span-gold total_product"
+                              t-esc="website_sale_order.cart_quantity or '0'"/>
+                        <span class="font-weight-bold span-gold total_product">
+                            PCS </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <button class="btn " id="finalise-btn">FINALIZAR ORDEN</button>
+                </div>
+                <div class="col-md-6" style="text-align:center;display:none;" id="total_summary_phone">
+                    <div>
+                        <span class="span-gold">
+                            TOTAL: </span>
+                        <span class="font-weight-bold span-gold"
+                              t-esc="abs(website_sale_order.amount_total)"
+                              t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    </div>
+                    <div>
+                        <span class="font-weight-bold span-gold"
+                              t-esc="website_sale_order.cart_quantity or '0'"/>
+                        <span class="font-weight-bold span-gold">
+                            PCS </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <template id="website_search_box_imin" inherit_id="website.website_search_box" name="website search box ilmin">
+        <xpath expr="//div[hasclass('input-group-append')]" position="replace">
+            <div class="input-group-append">
+                <button type="submit" t-att-class="'btn oe_search_button %s' % (_submit_classes or 'btn-primary')"
+                        aria-label="Search" title="Search"><i class="fa fa-search"/></button>
+                <button id="clear_search" class="btn btn-primary"><i class="fa fa-times"></i></button>
+
+            </div>
+        </xpath>
+    </template>
+
+
+</odoo>

@@ -14,8 +14,14 @@
         </field>
     </record>
 
+    <record model="ir.actions.act_window" id="action_product_template_attribute_value">
+        <field name="name">Product Variant Prices</field>
+        <field name="res_model">product.template.attribute.value</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-
+    <menuitem id="menu_product_template_attribute_value" parent="stock.menu_stock_inventory_control" name="Product Variant Prices" sequence="10"
+              action="action_product_template_attribute_value"/>
 
 
 </odoo>

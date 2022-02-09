@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+
+    <template id="portal_layout_ilmin" inherit_id="portal.portal_layout" name="Portal Layout Ilmin">
+        <xpath expr='//div[@id="wrap"]' position="replace">
+            <div id="wrap" class='o_portal_wrap'>
+                <div class="container mb64">
+                    <t t-if="my_details">
+                        <div class="row justify-content-between mt-4">
+                            <div t-attf-class="col-12 col-md col-lg-6">
+                                <t t-out="0"/>
+                            </div>
+                            <div id="o_my_sidebar" class="pt-3 pt-lg-0 col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
+                                <div class="o_my_contact" t-if="sales_user">
+                                    <t t-call="portal.portal_contact"/>
+                                </div>
+                                <div class="o_portal_my_details">
+                                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i
+                                            class="fa fa-pencil"/> Edit</a></h4>
+                                    <hr class="mt-1 mb-0"/>
+                                    <div t-field="user_id.partner_id"
+                                         t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <t t-out="0"/>
+                    </t>
+                </div>
+            </div>
+
+        </xpath>
+        <xpath expr='//div[hasclass("bg-white")]' position="attributes">
+            <attribute name="class" remove="bg-white" separator=" "/>
+
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content"
+              name="Sales Order Portal Content ilmin">
+        <xpath expr='//div[@id="introduction"]' position="replace">
+            <div id="introduction" t-attf-class="pb-2 pt-3 #{'card-header' if report_type == 'html' else ''}">
+                <h2 class="my-0">
+                    <t t-esc="sale_order.type_name"/>
+                    <em t-esc="sale_order.name"/>
+                </h2>
+            </div>
+        </xpath>
+
+    </template>
+
+    <template id="portal_record_sidebar" inherit_id="portal.portal_record_sidebar"
+              name="My Portal Record Sidebar ilmin">
+        <xpath expr='//div[@id="sidebar_content"]' position="attributes">
+            <attribute name="class" remove="bg-white" separator=" "/>
+        </xpath>
+    </template>
+
+    <template id="portal_table_ilmin" inherit_id="portal.portal_table" name="My Portal Table Ilmin">
+        <xpath expr="//div[contains(@t-attf-class, 'table-responsive')]" position="attributes">
+            <attribute name="t-attf-class" remove="border" separator=" "/>
+        </xpath>
+    </template>
+
+
+    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content"
+              name="ilmin Sales Order Portal Content">
+        <xpath expr="//table[@id='sales_order_table']/thead" position="attributes">
+            <attribute name="class" remove="bg-100" separator=" "/>
+        </xpath>
+
+    </template>
+
+    <template id="portal_my_quotations_ilmin" inherit_id="sale.portal_my_quotations" name="My Quotations ilmin">
+        <xpath expr='//t[@t-call="portal.portal_layout"]' position="replace">
+
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Quotations</t>
+                </t>
+                <t t-if="not quotations">
+                    <p>There are currently no quotations for your account.</p>
+                </t>
+                <t t-if="quotations" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Quotation #</th>
+                            <th class="text-right">Quotation Date</th>
+                            <th class="text-right">Valid Until</th>
+                            <th class="text-center"/>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="quotations" t-as="quotation">
+                        <tr>
+                            <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>
+                            <td class="text-right"><span t-field="quotation.date_order"/></td>
+                            <td class="text-right"><span t-field="quotation.validity_date"/></td>
+                            <td class="text-center">
+                                <span t-if="quotation.state == 'cancel'" class="badge badge-pill badge-secondary"><i
+                                        class="fa fa-fw fa-remove"/> Cancelled</span>
+                                <span t-if="quotation.is_expired" class="badge badge-pill badge-secondary"><i
+                                        class="fa fa-fw fa-clock-o"/> Expired</span>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="quotation.amount_total"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+        </xpath>
+
+    </template>
+
+
+    <template id="portal_my_orders_ilmin" inherit_id="sale.portal_my_orders" name="My Sales Orders ilmin">
+
+        <xpath expr='//t[@t-call="portal.portal_layout"]' position="replace">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Sales Orders</t>
+                </t>
+                <t t-if="not orders">
+                    <p>There are currently no orders for your account.</p>
+                </t>
+                <t t-if="orders" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>
+                                <span class='d-none d-md-inline'>Sales Order #</span>
+                                <span class='d-block d-md-none'>Ref.</span>
+                            </th>
+                            <th class="text-right">Order Date</th>
+                            <th class="text-center"/>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="orders" t-as="order">
+                        <tr>
+                            <td><a t-att-href="order.get_portal_url()"><t t-esc="order.name"/></a></td>
+                            <td class="text-right">
+                                <span t-field="order.date_order" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                                <span class='d-none d-md-inline' t-field="order.date_order"
+                                      t-options="{'time_only': True}"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-if="order.state == 'done'" class="badge badge-pill badge-success">
+                                    <i class="fa fa-fw fa-check" role="img" aria-label="Done" title="Done"/>Done
+                                </span>
+                            </td>
+                            <td class="text-right"><span t-field="order.amount_total"/></td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+        </xpath>
+    </template>
+
+
+    <template id="portal_my_invoices_ilmin" inherit_id="account.portal_my_invoices"
+              name="My Invoices and Payments ilmin">
+        <xpath expr='//t[@t-call="portal.portal_layout"]' position="replace">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Invoices</t>
+                </t>
+                <t t-if="not invoices">
+                    <p>There are currently no invoices and payments for your account.</p>
+                </t>
+                <t t-if="invoices" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Invoice #</th>
+                            <th>Invoice Date</th>
+                            <th class='d-none d-md-table-cell'>Due Date</th>
+                            <th/>
+                            <th class="text-right">Amount Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="invoices" t-as="invoice">
+                            <tr>
+                                <td>
+                                    <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.name">
+                                        <t t-esc="invoice.name" t-if="invoice.name != '/'"/>
+                                        <em t-else="">Draft Invoice</em>
+                                    </a>
+                                </td>
+                                <td><span t-field="invoice.invoice_date"/></td>
+                                <td class='d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
+                                <td class="tx_status">
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state not in ('in_payment', 'paid', 'reversed')">
+                                        <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o"
+                                                                                     aria-label="Opened" title="Opened"
+                                                                                     role="img"></i><span
+                                                class="d-none d-md-inline"> Waiting for Payment</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state in ('paid', 'in_payment')">
+                                        <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check"
+                                                                                        aria-label="Paid" title="Paid"
+                                                                                        role="img"></i><span
+                                                class="d-none d-md-inline"> Paid</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'posted' and invoice.payment_state == 'reversed'">
+                                        <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check"
+                                                                                        aria-label="Reversed"
+                                                                                        title="Reversed"
+                                                                                        role="img"></i><span
+                                                class="d-none d-md-inline"> Reversed</span></span>
+                                    </t>
+                                    <t t-if="invoice.state == 'cancel'">
+                                        <span class="badge badge-pill badge-warning"><i class="fa fa-fw fa-remove"
+                                                                                        aria-label="Cancelled"
+                                                                                        title="Cancelled"
+                                                                                        role="img"></i><span
+                                                class="d-none d-md-inline"> Cancelled</span></span>
+                                    </t>
+                                </td>
+                                <td class="text-right"><span
+                                        t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual"
+                                        t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+
+
+        </xpath>
+    </template>
+</odoo>

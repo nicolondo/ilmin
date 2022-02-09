@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="theme_gold_ilmin.primary_variables_scss" model="theme.ir.asset">
+        <field name="key">theme_gold_ilmin.primary_variables_scss</field>
+        <field name="name">Primary variables SCSS</field>
+        <field name="bundle">web._assets_primary_variables</field>
+        <field name="path">theme_gold_ilmin/static/src/scss/primary_variables.scss</field>
+    </record>
+
+    <record id="theme_gold_ilmin.bootstrap_overridden_scss" model="theme.ir.asset">
+        <field name="key">theme_gold_ilmin.bootstrap_overridden_scss</field>
+        <field name="name">Bootstrap overridden SCSS</field>
+        <field name="bundle">web._assets_frontend_helpers</field>
+        <field name="directive">prepend</field>
+        <field name="path">theme_gold_ilmin/static/src/scss/bootstrap_overridden.scss</field>
+    </record>
+
+    <record id="theme_gold_ilmin.shop_page" model="theme.ir.asset">
+        <field name="key">theme_gold_ilmin.shop_page</field>
+        <field name="name">SHOP PAGE SCSS</field>
+        <field name="bundle">web._assets_frontend_helpers</field>
+        <field name="directive">prepend</field>
+        <field name="path">theme_gold_ilmin/static/src/scss/shop_page.css</field>
+    </record>
+
+</odoo>

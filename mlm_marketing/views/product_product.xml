@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_tree_view_ilmin" model="ir.ui.view">
+        <field name="name">product.product.product.tree.inherit.ilmin</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="lst_price" position="after">
+                <field name="price_extra"/>
+            </field>
+        </field>
+    </record>
+</odoo>
