@@ -312,7 +312,9 @@ span[itemprop="name"] {
 .table-desktop td{
     vertical-align: inherit;
 }
-
+.js_usermenu {
+    position:absolute !important;
+}
 .o_wsale_my_cart {
     display:none;
 }
@@ -486,7 +488,7 @@ main{
 
     }
     .cart_ilmin{
-        width: 420px;
+        width: 90%;
     }
 }
 
@@ -495,10 +497,16 @@ main{
     .item_mass_add,.item_qty_add{
        padding: 0px;
     }
+     .cart_ilmin{
+        width: 400px;
+    }
 }
 @media (max-width: 400px) {
     .o_wsale_products_main_row{
         width:none;
+    }
+    .cart_ilmin{
+        width: 380px;
     }
     .product_name{
         width:100%
