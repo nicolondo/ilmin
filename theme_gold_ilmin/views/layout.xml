@@ -509,7 +509,7 @@
             <div class="card-body row">
                 <div class="col-md-6" id="total_summary_desktop">
                     <span class="span-gold total_product">
-                        TOTAL: </span>
+                        TOTAL + IVA: </span>
                     <div>
                         <span class="font-weight-bold span-gold"
                               t-esc="abs(website_sale_order.amount_total)"
