@@ -7,7 +7,9 @@
         <field name="arch" type="xml">
             <kanban
                     class="o_kanban_dashboard" sample="1"
-                    create="0">
+                    create="0"
+                    banner_route="/mlm/mlm_onboarding_panel">
+
                 <templates>
                     <t t-name="kanban-box">
                         <div class="row w-100 " style="display: contents;">
@@ -82,6 +84,7 @@
                             </div>
                         </div>
                     </t>
+
                 </templates>
             </kanban>
         </field>
