@@ -22,3 +22,6 @@ class MLMOnboarding(http.Controller):
         mlm_dashbord = request.env['mlm_marketing.mlm'].search([('user_id', '=', current_user_id.id)], limit=1)
         if not mlm_dashbord:
             mlm_dashbord = request.env['mlm_marketing.mlm'].create({'user_id': current_user_id.id})
+        return {
+            'html': request.env.ref('mlm_marketing.mlm_onboarding_panel')._render()
+        }
