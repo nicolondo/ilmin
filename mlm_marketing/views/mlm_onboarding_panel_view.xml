@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ONBOARDING PANEL-->
+        <template id="mlm_onboarding_panel" name="mlm_marketing.mlm_onboarding_panel">
+            <div class="container-fluid" id="dash_container">
+            </div>
+        </template>
+    </data>
+</odoo>
