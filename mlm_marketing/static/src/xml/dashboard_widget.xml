@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template>
+    <t t-name="graph_dashboard_ept">
+        <div class="p-2 d-flex justify-content-center">
+            <button t-att-class="widget.graph_data.sort_on == 'week' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="week">7 DIAS
+            </button>
+            <button t-att-class="widget.graph_data.sort_on == 'month' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="month">30 DIAS
+            </button>
+            <button t-att-class="widget.graph_data.sort_on == 'year' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="year">ANO
+            </button>
+
+
+        </div>
+        <div class="container o_kanban_card_content p-0 ep_kanban_graph">
+            <div class="graph_ept">
+
+            </div>
+        </div>
+
+    </t>
+    <t t-name="graph_tree_ept">
+        <div class="container w-100 p-0 ep_kanban_graph">
+            <div class="tree_ept">
+                <div id="my_tree"></div>
+
+            </div>
+        </div>
+
+    </t>
+    <t t-name="statistic_profit_ept">
+        <div class="p-2 d-flex justify-content-center">
+            <button t-att-class="widget.graph_data.sort_on == 'day' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="day">HOY
+            </button>
+            <button t-att-class="widget.graph_data.sort_on == 'week' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="week">7 DIAS
+            </button>
+            <button t-att-class="widget.graph_data.sort_on == 'month' ? 'btn day-filter active' : 'btn day-filter '"
+                    value="month">30 DIAS
+            </button>
+
+        </div>
+        <ul class="list-group">
+
+            <li class="list-group-item justify-content-between">
+                <div id="l1"></div>
+                <span
+                        class="badge">Propias
+                </span>
+            </li>
+            <li class="list-group-item justify-content-between">
+                <div id="l2"></div>
+                <span
+                        class="badge">2 nivel
+                </span>
+            </li>
+            <li class="list-group-item justify-content-between">
+                <div id="l3"></div>
+                <span
+                        class="badge">3 nivel
+                </span>
+            </li>
+        </ul>
+
+
+    </t>
+</template>

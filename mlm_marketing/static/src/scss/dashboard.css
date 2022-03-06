@@ -1,0 +1,83 @@
+#dash_container,.o_kanban_dashboard{
+
+background: #201F1D;
+}
+.dash_kanban_record{
+    background: #242424 !important;
+    border: none !important;
+    border-radius: 20px;
+    color: #C8C8C8 !important;
+}
+.dash_kanban_record_title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #FFCC48;
+}
+#hello_user{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+}
+
+.day-filter{
+    background: #2B2B2B;
+    border-radius: 7px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 10px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color:#2B2B2B;
+    color: #FFFFFF;
+    padding: 1rem 3rem !important;
+
+}
+
+.day-filter.active{
+    font-size: 13px;
+    background: #373737;
+}
+.dash_kanban_record .list-group-item{
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 30px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+.dash_kanban_record .list-group-item .badge{
+   font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+
+    color: #FFCC48;
+}
+div.o_field_widget {
+    display:block;
+}
