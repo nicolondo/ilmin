@@ -33,6 +33,7 @@
         'views/brand.xml',
         'views/import_bom_wizard.xml',
         'views/mlm_dashboard.xml',
+        'views/mlm_onboarding_panel_view.xml',
 
     ],
     # only loaded in demonstration mode
