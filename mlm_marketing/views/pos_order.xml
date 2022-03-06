@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_pos_form_comission" model="ir.ui.view">
+        <field name="name">view_pos_pos_form_comission</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="comission_level1"/>
+                <field name="comission_level2"/>
+                <field name="comission_level3"/>
+            </field>
+        </field>
+    </record>
+</odoo>

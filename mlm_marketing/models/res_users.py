@@ -11,6 +11,7 @@ class ResUsers(models.Model):
         string='Allowed POS',
         help="Allowed Points of Sales for the user. POS managers can use all POS.",
     )
+    sponsor = fields.Many2one('res.users',string="Sponsor")
 
     def write(self, values):
         res = super(ResUsers, self).write(values)

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Dashboard View -->
+    <record id="my_dashboard_kanban_view_ept" model="ir.ui.view">
+        <field name="name">My dashboard</field>
+        <field name="model">mlm_marketing.mlm</field>
+        <field name="arch" type="xml">
+            <kanban
+                    class="o_kanban_dashboard" sample="1"
+                    create="0">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="row w-100 " style="display: contents;">
+                            <div class="card o_kanban_record dash_kanban_record w-100 mt-4 ml-5 mr-5 p-4">
+                                <span id="hello_user">HOLA
+                                    <field name="user_id"/>
+                                    !
+                                </span>
+                                <div class="pt-3 d-none">
+                                    <span class="d-flex">Esta semana visitaras a 6 personas</span>
+                                    <span class="d-flex">y has ganado $50,000</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row w-100 " style="display: contents;">
+                            <div class="col-6">
+                                <div class="card o_kanban_record dash_kanban_record mt-4 ml-4 p-4 w-100">
+                                    <span class="dash_kanban_record_title">Ganancias</span>
+                                    <field name="statistic_profit_data"
+                                           widget="statistic_profit_ept"/>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card o_kanban_record dash_kanban_record mt-4 p-4 w-100">
+                                    <span class="dash_kanban_record_title">Cantidad clientes</span>
+                                    <ul class="list-group pt-5">
+                                        <div class="p-2 d-flex justify-content-center">
+                                        </div>
+                                        <li class="list-group-item justify-content-between">
+                                            <field name="level1_nbr_customer"/>
+
+                                            <span
+                                                    class="badge">Propias
+                                            </span>
+                                        </li>
+                                        <li class="list-group-item justify-content-between">
+                                            <field name="level2_nbr_customer"/>
+
+                                            <span
+                                                    class="badge">2 nivel
+                                            </span>
+                                        </li>
+                                        <li class="list-group-item justify-content-between">
+
+                                            <field name="level3_nbr_customer"/>
+
+                                            <span
+                                                    class="badge">3 nivel
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card o_kanban_record dash_kanban_record  mt-4 p-4 mr-5 ml-5 w-100">
+                            <span class="dash_kanban_record_title">Crecimiento</span>
+
+                            <div>
+                                <field name="graph_order_data"
+                                       graph_type="line" widget="dashboard_graph_ept"/>
+                            </div>
+                        </div>
+                        <div id="kanban_tree"
+                             class="card o_kanban_record  dash_kanban_record  mt-4 p-4 mr-5 ml-5 w-100">
+                            <span class="dash_kanban_record_title">Genealogia</span>
+                            <div>
+                                <field name="tree_data" style="width:100%%"
+                                       widget="dashboard_tree_ept"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="all_dashboard_kanban_view_ept" model="ir.ui.view">
+        <field name="name">All dashboard</field>
+        <field name="model">mlm_marketing.mlm</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="level1_profit_today"/>
+                <field name="level1_profit_week"/>
+                <field name="level1_profit_month"/>
+                <field name="level2_profit_today"/>
+                <field name="level2_profit_week"/>
+                <field name="level2_profit_month"/>
+                <field name="level3_profit_today"/>
+                <field name="level3_profit_week"/>
+                <field name="level3_profit_month"/>
+                <field name="level1_nbr_customer"/>
+                <field name="level2_nbr_customer"/>
+                <field name="level3_nbr_customer"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dashboards_form_action"
+            model="ir.actions.act_window">
+        <field name="name">Dashboards</field>
+        <field name="res_model">mlm_marketing.mlm</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <record id="my_dashboard_kanban_action"
+            model="ir.actions.act_window">
+        <field name="name">My Dashboard</field>
+        <field name="res_model">mlm_marketing.mlm</field>
+        <field name="view_mode">kanban</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="view_id" ref="my_dashboard_kanban_view_ept"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is no Dashboard for you yet.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="mlm_menu" name="MLM"
+              web_icon="mlm_marketing,static/description/icon.png"/>
+
+
+    <menuitem id="mlm_menu_orders"
+              name="Orders" parent="mlm_marketing.mlm_menu"
+              sequence="20"/>
+    <menuitem id="mlm_main_menu_dashboard"
+              name="Dashboards" parent="mlm_marketing.mlm_menu"
+              sequence="10"/>
+    <menuitem id="mlm_main_menu_pos"
+              name="Point of sale" parent="mlm_marketing.mlm_menu" action="point_of_sale.action_pos_config_kanban"
+              sequence="15"/>
+    <menuitem id="mlm_menu_sale_order"
+              name="Orders" parent="mlm_marketing.mlm_menu_orders"
+              action="point_of_sale.action_pos_pos_form" sequence="10"/>
+    <menuitem id="mlm_menu_pos_payment"
+              name="Payments" parent="mlm_marketing.mlm_menu_orders"
+              action="point_of_sale.action_pos_payment_form" sequence="20"/>
+    <menuitem id="mlm_menu_sale_customer"
+              name="Customers" parent="mlm_marketing.mlm_menu_orders"
+              action="account.res_partner_action_customer" sequence="30"/>
+
+    <menuitem id="mlm_menu_dashboards"
+              name="All Dashboards" parent="mlm_main_menu_dashboard"
+              action="dashboards_form_action" sequence="20"/>
+    <menuitem id="mlm_my_menu_dashboard"
+              name="My Dashboard" parent="mlm_main_menu_dashboard"
+              action="my_dashboard_kanban_action" sequence="10"/>
+
+</odoo>
