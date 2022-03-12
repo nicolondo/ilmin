@@ -42,7 +42,7 @@ class SaleOrder(models.Model):
         return {'success': True, 'line_id': line.id if line else False,
                 'line_total': Monetary.value_to_html(line.price_subtotal if line else 0, {'display_currency': currency}),
                 'product_tmlp_total': 'TOTAL : '+Monetary.value_to_html(product_tmlp_total, {'display_currency': currency}),
-                'cart_amount_total':  Monetary.value_to_html(order.amount_total, {'display_currency': currency}),
+                'cart_amount_total':  Monetary.value_to_html(order.amount_untaxed, {'display_currency': currency}),
                 'cart_qty': order.cart_quantity,
                 }
 

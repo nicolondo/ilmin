@@ -17,8 +17,13 @@
                                     <t t-call="portal.portal_contact"/>
                                 </div>
                                 <div class="o_portal_my_details">
-                                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i
-                                            class="fa fa-pencil"/> Edit</a></h4>
+                                    <h4>Details
+                                        <a role="button" href="/my/account" class="btn btn-sm btn-link">
+                                            <i
+                                                    class="fa fa-pencil"/>
+                                            Edit
+                                        </a>
+                                    </h4>
                                     <hr class="mt-1 mb-0"/>
                                     <div t-field="user_id.partner_id"
                                          t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
@@ -50,14 +55,16 @@
                 </h2>
             </div>
         </xpath>
+        <xpath expr='//section[@id="terms"]' position="replace"/>
+        <xpath expr='//section[@id="details"]/table/thead' position="attributes">
+            <attribute name="class" remove="bg-100" separator=" "/>
+        </xpath>
 
     </template>
 
     <template id="portal_record_sidebar" inherit_id="portal.portal_record_sidebar"
               name="My Portal Record Sidebar ilmin">
-        <xpath expr='//div[@id="sidebar_content"]' position="attributes">
-            <attribute name="class" remove="bg-white" separator=" "/>
-        </xpath>
+        <xpath expr='//div[@id="sidebar_content"]' position="replace"/>
     </template>
 
     <template id="portal_table_ilmin" inherit_id="portal.portal_table" name="My Portal Table Ilmin">
@@ -67,12 +74,18 @@
     </template>
 
 
-    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content"
-              name="ilmin Sales Order Portal Content">
-        <xpath expr="//table[@id='sales_order_table']/thead" position="attributes">
-            <attribute name="class" remove="bg-100" separator=" "/>
-        </xpath>
+    <template id="portal_invoice_page" inherit_id="account.portal_invoice_page"
+              name="Invoice Portal Templateilmin">
 
+        <xpath expr='//t[@t-call="portal.portal_record_sidebar"]' position="replace">
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_template" inherit_id="sale.sale_order_portal_template"
+              name="ilmin Sales Order Portal Template"
+              primary="True">
+        <xpath expr='//t[@t-call="portal.portal_record_sidebar"]' position="replace">
+        </xpath>
     </template>
 
     <template id="portal_my_quotations_ilmin" inherit_id="sale.portal_my_quotations" name="My Quotations ilmin">
@@ -99,14 +112,28 @@
                     </thead>
                     <t t-foreach="quotations" t-as="quotation">
                         <tr>
-                            <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>
-                            <td class="text-right"><span t-field="quotation.date_order"/></td>
-                            <td class="text-right"><span t-field="quotation.validity_date"/></td>
+                            <td>
+                                <a t-att-href="quotation.get_portal_url()">
+                                    <t t-esc="quotation.name"/>
+                                </a>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="quotation.date_order"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="quotation.validity_date"/>
+                            </td>
                             <td class="text-center">
-                                <span t-if="quotation.state == 'cancel'" class="badge badge-pill badge-secondary"><i
-                                        class="fa fa-fw fa-remove"/> Cancelled</span>
-                                <span t-if="quotation.is_expired" class="badge badge-pill badge-secondary"><i
-                                        class="fa fa-fw fa-clock-o"/> Expired</span>
+                                <span t-if="quotation.state == 'cancel'" class="badge badge-pill badge-secondary">
+                                    <i
+                                            class="fa fa-fw fa-remove"/>
+                                    Cancelled
+                                </span>
+                                <span t-if="quotation.is_expired" class="badge badge-pill badge-secondary">
+                                    <i
+                                            class="fa fa-fw fa-clock-o"/>
+                                    Expired
+                                </span>
                             </td>
                             <td class="text-right">
                                 <span t-field="quotation.amount_total"/>
@@ -147,7 +174,11 @@
                     </thead>
                     <t t-foreach="orders" t-as="order">
                         <tr>
-                            <td><a t-att-href="order.get_portal_url()"><t t-esc="order.name"/></a></td>
+                            <td>
+                                <a t-att-href="order.get_portal_url()">
+                                    <t t-esc="order.name"/>
+                                </a>
+                            </td>
                             <td class="text-right">
                                 <span t-field="order.date_order" t-options="{'widget': 'date'}"/>&amp;nbsp;
                                 <span class='d-none d-md-inline' t-field="order.date_order"
@@ -158,7 +189,9 @@
                                     <i class="fa fa-fw fa-check" role="img" aria-label="Done" title="Done"/>Done
                                 </span>
                             </td>
-                            <td class="text-right"><span t-field="order.amount_total"/></td>
+                            <td class="text-right">
+                                <span t-field="order.amount_total"/>
+                            </td>
                         </tr>
                     </t>
                 </t>
@@ -199,39 +232,61 @@
                                         <em t-else="">Draft Invoice</em>
                                     </a>
                                 </td>
-                                <td><span t-field="invoice.invoice_date"/></td>
-                                <td class='d-none d-md-table-cell'><span t-field="invoice.invoice_date_due"/></td>
+                                <td>
+                                    <span t-field="invoice.invoice_date"/>
+                                </td>
+                                <td class='d-none d-md-table-cell'>
+                                    <span t-field="invoice.invoice_date_due"/>
+                                </td>
                                 <td class="tx_status">
                                     <t t-if="invoice.state == 'posted' and invoice.payment_state not in ('in_payment', 'paid', 'reversed')">
-                                        <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o"
-                                                                                     aria-label="Opened" title="Opened"
-                                                                                     role="img"></i><span
-                                                class="d-none d-md-inline"> Waiting for Payment</span></span>
+                                        <span class="badge badge-pill badge-info">
+                                            <i class="fa fa-fw fa-clock-o"
+                                               aria-label="Opened" title="Opened"
+                                               role="img"></i>
+                                            <span
+                                                    class="d-none d-md-inline">Waiting for Payment
+                                            </span>
+                                        </span>
                                     </t>
                                     <t t-if="invoice.state == 'posted' and invoice.payment_state in ('paid', 'in_payment')">
-                                        <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check"
-                                                                                        aria-label="Paid" title="Paid"
-                                                                                        role="img"></i><span
-                                                class="d-none d-md-inline"> Paid</span></span>
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check"
+                                               aria-label="Paid" title="Paid"
+                                               role="img"></i>
+                                            <span
+                                                    class="d-none d-md-inline">Paid
+                                            </span>
+                                        </span>
                                     </t>
                                     <t t-if="invoice.state == 'posted' and invoice.payment_state == 'reversed'">
-                                        <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check"
-                                                                                        aria-label="Reversed"
-                                                                                        title="Reversed"
-                                                                                        role="img"></i><span
-                                                class="d-none d-md-inline"> Reversed</span></span>
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check"
+                                               aria-label="Reversed"
+                                               title="Reversed"
+                                               role="img"></i>
+                                            <span
+                                                    class="d-none d-md-inline">Reversed
+                                            </span>
+                                        </span>
                                     </t>
                                     <t t-if="invoice.state == 'cancel'">
-                                        <span class="badge badge-pill badge-warning"><i class="fa fa-fw fa-remove"
-                                                                                        aria-label="Cancelled"
-                                                                                        title="Cancelled"
-                                                                                        role="img"></i><span
-                                                class="d-none d-md-inline"> Cancelled</span></span>
+                                        <span class="badge badge-pill badge-warning">
+                                            <i class="fa fa-fw fa-remove"
+                                               aria-label="Cancelled"
+                                               title="Cancelled"
+                                               role="img"></i>
+                                            <span
+                                                    class="d-none d-md-inline">Cancelled
+                                            </span>
+                                        </span>
                                     </t>
                                 </td>
-                                <td class="text-right"><span
-                                        t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual"
-                                        t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                                <td class="text-right">
+                                    <span
+                                            t-esc="-invoice.amount_residual if invoice.move_type == 'out_refund' else invoice.amount_residual"
+                                            t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/>
+                                </td>
                             </tr>
                         </t>
                     </tbody>
