@@ -36,7 +36,11 @@ class WebsiteSale(WebsiteSale):
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
     ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
-        ppg =100
+
+        if not request.env['res.users'].sudo().browse(request.env.uid).has_group('base.group_user'):
+            return request.redirect('/web/login')
+
+        ppg = 100
         post['order'] = "name asc"
         order = request.website.sale_get_order()
         if order and order.state != 'draft':
@@ -240,7 +244,8 @@ class WebsiteSale(WebsiteSale):
 
             )
             cart_lines_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_lines_ilmin', values)
-            cart_sammury_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_sammury_ilmin', values)
+            cart_sammury_ilmin = request.env['ir.ui.view']._render_template('theme_gold_ilmin.cart_sammury_ilmin',
+                                                                            values)
 
             result["cart_lines_ilmin"] = cart_lines_ilmin
             result["cart_sammury_ilmin"] = cart_sammury_ilmin
