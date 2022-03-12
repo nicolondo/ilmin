@@ -491,7 +491,7 @@
     <template id="cart_sammury_ilmin" name="Ilmin cart summary">
         <div class="card">
             <div class="card-body row" id="shipping_and_billing">
-                <div class="span-gold">DIRECCIÓN DE ENVIO</div>
+                <div class="span-gold w-100">DIRECCIÓN DE ENVIO</div>
                 <t t-set="same_shipping"
                    t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
                 <div class="col-md-8">
