@@ -32,10 +32,11 @@
             <span t-attf-class="ml-lg-auto d-none ml-2 d-lg-inline text-muted nav-link my_cart_qty"
                   t-esc="website_sale_order.cart_quantity or '0'"/>
             <span t-attf-class="d-none d-lg-inline ml-2 text-muted nav-link my_cart_items">
-                Items</span>
+                Items
+            </span>
 
             <span t-attf-class="d-none d-lg-inline ml-2 font-weight-bold text-muted nav-link my_cart_amount"
-                  t-esc="website_sale_order.amount_total"
+                  t-esc="website_sale_order.amount_untaxed"
                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
             <span t-attf-class="d-none d-lg-inline ml-2 mr-2 font-weight-bold text-muted nav-link my_cart_icon">
                 <img src="/theme_gold_ilmin/static/src/img/shopping-cart.svg"/>
@@ -88,9 +89,10 @@
                 <span class="span_vertical span-gold"
                       t-esc="product.name"/>
                 <span class="total_product" style="display:none;">
-                    TOTAL: <span
-                        t-esc="abs(product_template['order_line_product_tmlp_total'])"
-                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    TOTAL:
+                    <span
+                            t-esc="abs(product_template['order_line_product_tmlp_total'])"
+                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                 </span>
 
 
@@ -110,73 +112,86 @@
                        t-value="website_sale_order._get_line_info(order_id=website_sale_order.id, product_id=variant_id.id)"/>
                     <input type="hidden" name="product_id" t-att-value="variant_id.id"/>
                     <ul class="nav  row text-center " id="productlist">
-                        <li class="nav-item item_product_list item_product_price col-2 col-md"><span
-                                class="product_variant_price"
-                                t-esc="abs(combination_info['price'])"
-                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <li class="nav-item item_product_list item_product_price col-2 col-md">
+                            <span
+                                    class="product_variant_price"
+                                    t-esc="abs(combination_info['price'])"
+                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
 
                             <span class="d-none item_variant_hidden"
                                   t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/>
                         </li>
-                        <li class="nav-item item_product_list item_variant col-2 col-md"><span
-                                t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/></li>
-                        <li class="nav-item item_product_list item_mass_add col-4 col-md"><span>
-                            <button
-                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
-                                    aria-label="Add one" title="Add one" t-attf-qty="1">
-                                +1
-                            </button>
-                            <button
-                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
-                                    aria-label="Add Three" title="Add Three" t-attf-qty="3">
-                                +3
-                            </button>
-                            <button
-                                    class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
-                                    aria-label="Add Six" title="Add Six" t-attf-qty="6">
-                                +6
-                            </button>
+                        <li class="nav-item item_product_list item_variant col-2 col-md">
+                            <span
+                                    t-esc="', '.join(variant_id.product_template_attribute_value_ids.mapped('name'))"/>
+                        </li>
+                        <li class="nav-item item_product_list item_mass_add col-4 col-md">
+                            <span>
+                                <button
+                                        class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                        aria-label="Add one" title="Add one" t-attf-qty="1">
+                                    +1
+                                </button>
+                                <button
+                                        class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                        aria-label="Add Three" title="Add Three" t-attf-qty="3">
+                                    +3
+                                </button>
+                                <button
+                                        class="btn btn-secondary float_left d-md-inline-block add_mass quick_add_to_cart"
+                                        aria-label="Add Six" title="Add Six" t-attf-qty="6">
+                                    +6
+                                </button>
 
-                        </span></li>
+                            </span>
+                        </li>
                         <li class="nav-item item_product_list item_qty_add col-2 col-md"
-                            style="display:inline-flex;"><div
-                                t-att-class="'css_quantity input-group mx-auto justify-content-center invisible'  if line_info['order_line_product_qty'] == 0 else 'css_quantity input-group mx-auto justify-content-center'"
-                                t-if="product.visible_qty_configurator">
-                            <div class="input-group-prepend">
-                                <button t-attf-href="#"
-                                        class="btn btn-primary js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
-                                        aria-label="Remove one" title="Remove one">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <input type="text" class="js_quantity form-control quantity"
-                                   data-min="0" name="add_qty"
-                                   t-att-value="line_info['order_line_product_qty'] or 0"
-                            />
-                            <div></div>
-                            <div class="input-group-append">
-                                <button t-attf-href="#"
-                                        class="btn btn-primary float_left js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
-                                        aria-label="Add one" title="Add one">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
+                            style="display:inline-flex;">
+                            <div
+                                    t-att-class="'css_quantity input-group mx-auto justify-content-center invisible'  if line_info['order_line_product_qty'] == 0 else 'css_quantity input-group mx-auto justify-content-center'"
+                                    t-if="product.visible_qty_configurator">
+                                <div class="input-group-prepend">
+                                    <button t-attf-href="#"
+                                            class="btn btn-primary js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
+                                            aria-label="Remove one" title="Remove one">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="js_quantity form-control quantity"
+                                       data-min="0" name="add_qty"
+                                       t-att-value="line_info['order_line_product_qty'] or 0"
+                                />
+                                <div></div>
+                                <div class="input-group-append">
+                                    <button t-attf-href="#"
+                                            class="btn btn-primary float_left js_add_cart_json_ilmin d-md-inline-block quick_add_to_cart"
+                                            aria-label="Add one" title="Add one">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
 
-                        </div>
+                            </div>
                             <span
                                     t-att-class="'action-trash invisible'  if line_info['order_line_product_qty'] == 0 else 'action-trash'">
                                 <a href='#' aria-label="Remove from cart"
                                    title="Remove from cart"
-                                   class='js_delete_product_ilmin no-decoration quick_add_to_cart'><big><i
-                                        class='fa fa-trash-o'></i></big></a>
-                            </span></li>
-                        <li class="nav-item  item_product_list item_total_line col-2 col-md"><span
-                                class="line_total_price"
-                                t-esc="abs(line_info['order_line_product_total']) or 0"
-                                t-options='{
+                                   class='js_delete_product_ilmin no-decoration quick_add_to_cart'>
+                                    <big>
+                                        <i
+                                                class='fa fa-trash-o'></i>
+                                    </big>
+                                </a>
+                            </span>
+                        </li>
+                        <li class="nav-item  item_product_list item_total_line col-2 col-md">
+                            <span
+                                    class="line_total_price"
+                                    t-esc="abs(line_info['order_line_product_total']) or 0"
+                                    t-options='{
                                                    "widget": "monetary",
                                                    "display_currency": product.currency_id,
-                                               }'/></li>
+                                               }'/>
+                        </li>
                     </ul>
 
                 </div>
@@ -231,7 +246,8 @@
             Your cart is empty!
         </div>
         <div class="alert alert-info" id="alert_order_success" role="status">
-            <p>Order <span class="span-gold font-weight-bold " id="order_alert"> SOOOO1 </span> successfuly created</p>
+            <p>Order <span class="span-gold font-weight-bold " id="order_alert">SOOOO1</span> successfuly created
+            </p>
         </div>
 
 
@@ -458,7 +474,8 @@
 
             <div class="justify-content-between">
                 <button id="add_edit_adress_btn"
-                        class="btn btn-secondary mb32 float-right" >Confirmar</button>
+                        class="btn btn-secondary mb32 float-right">Confirmar
+                </button>
 
 
             </div>
@@ -478,7 +495,8 @@
                     </div>
                     <t t-esc="contact" t-options="dict(widget='contact', fields=['name', 'address'], no_marker=True)"/>
                     <a class="ml-auto font-weight-bolder span_vertical span_underlined edit_address"
-                       t-att-data-contact-id="contact.id"> EDITAR</a>
+                       t-att-data-contact-id="contact.id">EDITAR
+                    </a>
 
                 </div>
             </div>
@@ -501,7 +519,8 @@
                 </div>
                 <div class="col-md-4">
                     <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
-                        EDITAR</a>
+                        EDITAR
+                    </a>
                 </div>
             </div>
         </div>
@@ -509,18 +528,29 @@
             <div class="card-body row">
                 <div class="col-md-6" id="total_summary_desktop">
                     <span class="span-gold total_product">
-                        TOTAL + IVA: </span>
+                        TOTAL :
+                    </span>
                     <div>
                         <span class="font-weight-bold span-gold"
-                              t-esc="abs(website_sale_order.amount_total)"
+                              t-esc="abs(website_sale_order.amount_untaxed)"
                               t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                         <span class="font-weight-bold span-gold total_product">
-                            | </span>
+                            |
+                        </span>
                         <span class="font-weight-bold span-gold total_product"
                               t-esc="website_sale_order.cart_quantity or '0'"/>
                         <span class="font-weight-bold span-gold total_product">
-                            PCS </span>
+                            PCS
+                        </span>
+
                     </div>
+                    <div>
+                        <span class="font-weight-bold span-gold total_product">
+                            +IVA
+                        </span>
+                    </div>
+
+
                 </div>
                 <div class="col-md-6">
 
@@ -529,16 +559,18 @@
                 <div class="col-md-6" style="text-align:center;display:none;" id="total_summary_phone">
                     <div>
                         <span class="span-gold">
-                            TOTAL: </span>
+                            TOTAL:
+                        </span>
                         <span class="font-weight-bold span-gold"
-                              t-esc="abs(website_sale_order.amount_total)"
+                              t-esc="abs(website_sale_order.amount_untaxed)"
                               t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                     </div>
                     <div>
                         <span class="font-weight-bold span-gold"
                               t-esc="website_sale_order.cart_quantity or '0'"/>
                         <span class="font-weight-bold span-gold">
-                            PCS </span>
+                            PCS
+                        </span>
                     </div>
                 </div>
             </div>
@@ -550,8 +582,12 @@
         <xpath expr="//div[hasclass('input-group-append')]" position="replace">
             <div class="input-group-append">
                 <button type="submit" t-att-class="'btn oe_search_button %s' % (_submit_classes or 'btn-primary')"
-                        aria-label="Search" title="Search"><i class="fa fa-search"/></button>
-                <button id="clear_search" class="btn btn-primary"><i class="fa fa-times"></i></button>
+                        aria-label="Search" title="Search">
+                    <i class="fa fa-search"/>
+                </button>
+                <button id="clear_search" class="btn btn-primary">
+                    <i class="fa fa-times"></i>
+                </button>
 
             </div>
         </xpath>
