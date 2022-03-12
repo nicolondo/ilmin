@@ -260,7 +260,7 @@
                                     <ul class="navbar-nav-cart">
                                         <li class="nav-item mr-3 ilmin_cart_li_price">
                                             <span class="product_variant_price"
-                                                  t-esc="line.product_id.lst_price"
+                                                  t-esc="line.price_reduce_taxexcl"
                                                   t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                                             <div style="display:none">
                                                 <span
