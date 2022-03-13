@@ -64,9 +64,9 @@ odoo.define('statistic_profit_dashboard_ept.graph', function (require) {
             if(this.graph_data){
                 var dashboard = $(QWeb.render('statistic_profit_ept',{widget: this}))
                 this.$el.append(dashboard);
-                this.$el.find('#l1').html(this.graph_data.level_profit_today);
-                this.$el.find('#l2').html(this.graph_data.level_profit_week);
-                this.$el.find('#l3').html(this.graph_data.level_profit_month)
+                this.$el.find('#l1').html(this.graph_data.level1_profit);
+                this.$el.find('#l2').html(this.graph_data.level2_profit);
+                this.$el.find('#l3').html(this.graph_data.level3_profit)
 
             }
 
