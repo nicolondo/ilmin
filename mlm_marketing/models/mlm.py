@@ -155,17 +155,16 @@ class Mlm(models.Model):
             self._cr.execute("""select TRIM(TO_CHAR(DATE_TRUNC('month',month),'MONTH')),sum(amount_total) from
                                             (SELECT DATE_TRUNC('month',date(day)) as month,
                                               0 as amount_total
-                                            FROM generate_series(date(date_trunc('year', (current_date)))
-                                            , date(date_trunc('year', (current_date)) + interval '1 YEAR - 1 day')
+                                            FROM generate_series(date(date_trunc('month', (current_date - interval '11 month')))
+                                            , date(date_trunc('month', (current_date)))
                                             , interval  '1 MONTH') day
                                             union all
                                             SELECT DATE_TRUNC('month',date(date_order)) as month,
                                             sum(amount_total) as amount_total
                                               FROM   pos_order
-                                            WHERE  date(date_order) >= (select date_trunc('year', date(current_date))) AND 
-                                            date(date_order)::date <= (select date_trunc('year', date(current_date)) 
-                                            + '1 YEAR - 1 day')
-                                            and user_id = %s 
+                                            WHERE  date(date_order) >= (select date_trunc('month', date(current_date - interval '11 month'))) AND 
+                                            date(date_order)::date <= (select date_trunc('month', date(current_date)))
+                                            and user_id = %s
                                             group by DATE_TRUNC('month',date(date_order))
                                             order by month
                                             )foo 
