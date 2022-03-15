@@ -155,8 +155,8 @@ class Mlm(models.Model):
             self._cr.execute("""select TRIM(TO_CHAR(DATE_TRUNC('month',month),'MONTH')),sum(amount_total) from
                                             (SELECT DATE_TRUNC('month',date(day)) as month,
                                               0 as amount_total
-                                            FROM generate_series(date(date_trunc('year', (current_date - interval '1 YEAR - 1 day')))
-                                            , date(date_trunc('year', (current_date)) )
+                                            FROM generate_series(date(date_trunc('month', (current_date - interval '11 month')))
+                                            , date(date_trunc('month', (current_date)) )
                                             , interval  '1 MONTH') day
                                             union all
                                             SELECT DATE_TRUNC('month',date(date_order)) as month,
