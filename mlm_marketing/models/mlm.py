@@ -47,12 +47,14 @@ class Mlm(models.Model):
             record.level1_profit_today = level1_profit_today
 
             level1_profit_week = sum(
-                order_obj.search([('user_id', '=', self.env.uid), ('date_order', '>', last_week)]).mapped(
+                order_obj.search([('user_id', '=', self.env.uid), ('date_order', '>=', last_week),
+                                  ('date_order', '<', today + timedelta(days=1))]).mapped(
                     'comission_level1'))
             record.level1_profit_week = level1_profit_week
 
             level1_profit_month = sum(
-                order_obj.search([('user_id', '=', self.env.uid), ('date_order', '>', last_month)]).mapped(
+                order_obj.search([('user_id', '=', self.env.uid), ('date_order', '>=', last_month),
+                                  ('date_order', '<', today + timedelta(days=1))]).mapped(
                     'comission_level1'))
             record.level1_profit_month = level1_profit_month
 
@@ -63,12 +65,14 @@ class Mlm(models.Model):
             record.level2_profit_today = level2_profit_today
 
             level2_profit_week = sum(order_obj.search(
-                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '>', last_week)]).mapped(
+                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '>=', last_week),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level2'))
             record.level2_profit_week = level2_profit_week
 
             level2_profit_month = sum(order_obj.search(
-                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '>', last_month)]).mapped(
+                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '>=', last_month),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level2'))
             record.level2_profit_month = level2_profit_month
 
@@ -79,12 +83,14 @@ class Mlm(models.Model):
             record.level3_profit_today = level3_profit_today
 
             level3_profit_week = sum(order_obj.search(
-                [('user_id.sponsor.sponsor.id', '=', self.env.uid), ('date_order', '>', last_week)]).mapped(
+                [('user_id.sponsor.sponsor.id', '=', self.env.uid), ('date_order', '>=', last_week),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level3'))
             record.level3_profit_week = level3_profit_week
 
             level3_profit_month = sum(order_obj.search(
-                [('user_id.sponsor.sponsor.id', '=', self.env.uid), ('date_order', '>', last_month)]).mapped(
+                [('user_id.sponsor.sponsor.id', '=', self.env.uid), ('date_order', '>=', last_month),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level3'))
             record.level3_profit_month = level3_profit_month
 
