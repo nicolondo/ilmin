@@ -88,25 +88,25 @@ class Mlm(models.Model):
             currency = self.env.company.currency_id
             if self._context.get('sort_profit') == 'day':
                 record.statistic_profit_data = json.dumps({
-                    "level_profit_today": Monetary.value_to_html(level1_profit_today, {'display_currency': currency}),
-                    "level_profit_week": Monetary.value_to_html(level1_profit_week, {'display_currency': currency}),
-                    "level_profit_month": Monetary.value_to_html(level1_profit_month, {'display_currency': currency}),
+                    "level1_profit": Monetary.value_to_html(level1_profit_today, {'display_currency': currency}),
+                    "level2_profit": Monetary.value_to_html(level2_profit_today, {'display_currency': currency}),
+                    "level3_profit": Monetary.value_to_html(level3_profit_today, {'display_currency': currency}),
                     "sort_on": self._context.get('sort_profit'),
 
                 })
             elif self._context.get('sort_profit') == "week":
                 record.statistic_profit_data = json.dumps({
-                    "level_profit_today": Monetary.value_to_html(level2_profit_today, {'display_currency': currency}),
-                    "level_profit_week": Monetary.value_to_html(level2_profit_week, {'display_currency': currency}),
-                    "level_profit_month": Monetary.value_to_html(level2_profit_month, {'display_currency': currency}),
+                    "level1_profit": Monetary.value_to_html(level1_profit_week, {'display_currency': currency}),
+                    "level2_profit": Monetary.value_to_html(level2_profit_week, {'display_currency': currency}),
+                    "level3_profit": Monetary.value_to_html(level3_profit_week, {'display_currency': currency}),
                     "sort_on": self._context.get('sort_profit'),
 
                 })
             elif self._context.get('sort_profit') == "month":
                 record.statistic_profit_data = json.dumps({
-                    "level_profit_today": Monetary.value_to_html(level3_profit_today, {'display_currency': currency}),
-                    "level_profit_week": Monetary.value_to_html(level3_profit_week, {'display_currency': currency}),
-                    "level_profit_month": Monetary.value_to_html(level3_profit_month, {'display_currency': currency}),
+                    "level1_profit": Monetary.value_to_html(level1_profit_month, {'display_currency': currency}),
+                    "level2_profit": Monetary.value_to_html(level2_profit_month, {'display_currency': currency}),
+                    "level3_profit": Monetary.value_to_html(level3_profit_month, {'display_currency': currency}),
                     "sort_on": self._context.get('sort_profit'),
 
                 })

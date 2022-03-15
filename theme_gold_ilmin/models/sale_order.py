@@ -52,7 +52,7 @@ class SaleOrder(models.Model):
 
         order_lines_product_total = order.order_line.filtered(
             lambda l: l.product_id.id == product_id)
-        order_line_product_total =sum(li.price_total for li in order_lines_product_total)
+        order_line_product_total =sum(li.price_reduce_taxexcl for li in order_lines_product_total)
         order_line_product_qty =sum(li.product_uom_qty for li in order_lines_product_total)
 
         product_tmpl_order_lines = order.order_line.filtered(
