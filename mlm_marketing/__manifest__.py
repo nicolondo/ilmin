@@ -28,7 +28,7 @@
         'views/res_config_setting.xml',
         'views/res_users_views.xml',
         'views/product.xml',
-        'views/pos_order.xml',
+        #'views/pos_order.xml',
         'views/product_product.xml',
         'views/brand.xml',
         'views/import_bom_wizard.xml',
