@@ -2,6 +2,7 @@
 from odoo import models, fields, api
 from datetime import datetime, timedelta
 import json
+from odoo.exceptions import UserError
 
 
 class Mlm(models.Model):
@@ -36,12 +37,13 @@ class Mlm(models.Model):
         for record in self:
             order_obj = self.env['pos.order']
 
-            today = fields.Date.today()
-            last_week = fields.Date.today() - timedelta(days=7)
-            last_month = fields.Date.today() - timedelta(days=30)
+            today = datetime.combine(fields.Date.today(), datetime.min.time())
+            last_week = today - timedelta(days=7)
+            last_month = today - timedelta(days=30)
 
             level1_profit_today = sum(order_obj.search(
-                [('user_id', '=', self.env.uid), ('date_order', '=', today)]).mapped('comission_level1'))
+                [('user_id', '=', self.env.uid), ('date_order', '>=', today),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped('comission_level1'))
             record.level1_profit_today = level1_profit_today
 
             level1_profit_week = sum(
@@ -55,7 +57,8 @@ class Mlm(models.Model):
             record.level1_profit_month = level1_profit_month
 
             level2_profit_today = sum(order_obj.search(
-                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '=', today)]).mapped(
+                [('user_id.sponsor.id', '=', self.env.uid), ('date_order', '>=', today),
+                 ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level2'))
             record.level2_profit_today = level2_profit_today
 
@@ -70,7 +73,8 @@ class Mlm(models.Model):
             record.level2_profit_month = level2_profit_month
 
             level3_profit_today = sum(order_obj.search([('user_id.sponsor.sponsor.id', '=', self.env.uid)
-                                                           , ('date_order', '=', today)]).mapped(
+                                                           , ('date_order', '>=', today),
+                                                        ('date_order', '<', today + timedelta(days=1))]).mapped(
                 'comission_level3'))
             record.level3_profit_today = level3_profit_today
 
@@ -172,17 +176,16 @@ class Mlm(models.Model):
         def graph_of_current_week(user_id):
             self._cr.execute("""SELECT to_char(date(d.day),'DAY'), t.amount_total as sum
                                             FROM  (
-                                               SELECT day
-                                               FROM generate_series(date(date_trunc('week', (current_date)))
-                                                , date(date_trunc('week', (current_date)) + interval '6 days')
+                                                SELECT day
+                                               FROM generate_series(date(date_trunc('day', (current_date - interval '6 days')) )
+                                                , date(date_trunc('day', (current_date)) )
                                                 , interval  '1 day') day
                                                ) d
                                             LEFT   JOIN 
                                             (SELECT date(date_order)::date AS day, sum(amount_total) as amount_total
                                                FROM   pos_order
-                                               WHERE  date(date_order) >= (select date_trunc('week', date(current_date)))
-                                               AND    date(date_order) <= (select date_trunc('week', date(current_date)) 
-                                               + interval '6 days')
+                                               WHERE  date(date_order) >= (select date_trunc('day', date(current_date - interval '6 days')))
+                                               AND    date(date_order) <= (select date_trunc('day', date(current_date)) )
             								 	AND user_id =%s
                                                GROUP  BY 1
                                                ) t USING (day)
@@ -195,22 +198,20 @@ class Mlm(models.Model):
                                     SELECT 
                                       day::date as date_day,
                                       0 as amount_total
-                                    FROM generate_series(date(date_trunc('month', (current_date)))
-                                        , date(date_trunc('month', (current_date)) + interval '1 MONTH - 1 day')
+                                    FROM generate_series(date(date_trunc('day', (current_date - interval '27 day')))
+                                        , date(date_trunc('day', (current_date)))
                                         , interval  '1 day') day
                                     union all
                                     SELECT date(date_order)::date AS date_day,
                                     sum(amount_total) as amount_total
                                       FROM   pos_order
-                                    WHERE  date(date_order) >= (select date_trunc('month', date(current_date)))
-                                    AND date(date_order)::date <= (select date_trunc('month', date(current_date)) 
-                                    + '1 MONTH - 1 day')
+                                    WHERE  date(date_order) >= (select date_trunc('day', date(current_date - interval '30 day')))
+                                    AND date(date_order)::date <= (select date_trunc('day', date(current_date)))
             	                    and user_id = %s
-
                                     group by 1
                                     )foo 
-                                    GROUP  BY 1
-                                    ORDER  BY 1
+                                    GROUP  BY date_day
+                                    ORDER  BY date_day
             								""" % user_id)
             return self._cr.dictfetchall()
 
