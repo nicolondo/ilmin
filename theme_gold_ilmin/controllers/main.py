@@ -37,7 +37,7 @@ class WebsiteSale(WebsiteSale):
     ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
 
-        if not request.env['res.users'].sudo().browse(request.env.uid).has_group('base.group_user'):
+        if not (request.env['res.users'].sudo().browse(request.env.uid).has_group('base.group_user') or request.env['res.users'].sudo().browse(request.env.uid).has_group('base.group_portal')):
             return request.redirect('/web/login')
 
         ppg = 100
@@ -199,6 +199,7 @@ class WebsiteSale(WebsiteSale):
             'pricelist': pricelist,
             'add_qty': add_qty,
             'products': products,
+            'user':request.env['res.users'].sudo().browse(request.env.uid),
             'search_count': product_count,  # common for all searchbox
             'bins': TableCompute().process(products, ppg, ppr),
             'ppg': ppg,
@@ -234,6 +235,8 @@ class WebsiteSale(WebsiteSale):
         if sale_order:
             values = {
                 "website_sale_order": sale_order,
+                "user": request.env['res.users'].sudo().browse(request.env.uid),
+
             }
 
             result = sale_order._cart_update_custom(
@@ -322,6 +325,7 @@ class WebsiteSale(WebsiteSale):
             order = request.website.sale_get_order()
             values = {
                 "website_sale_order": order,
+                "user": request.env['res.users'].sudo().browse(request.env.uid),
             }
             all_adress_shipping = request.env['ir.ui.view']._render_template(
                 'theme_gold_ilmin.address_on_payment_ilmin', values)
