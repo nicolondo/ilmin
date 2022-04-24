@@ -354,11 +354,11 @@
                                     <t t-set='contact' t-value="ship"/>
                                     <t t-set='selected' t-value="bool(website_sale_order.partner_shipping_id==ship)"/>
                                     <t t-set='readonly' t-value="bool(len(shippings)==1)"/>
-                                    <t t-set='edit_billing' t-value="bool(ship==user.partner_id)"/>
+                                    <t t-set='edit_billing' t-value="bool(ship==website_sale_order.partner_id)"/>
                                     <t t-set="allow_edit"
-                                       t-value="not user.partner_id or (ship.id in user.partner_id.child_ids.ids)"/>
+                                       t-value="not website_sale_order.partner_id or (ship.id in website_sale_order.partner_id.child_ids.ids)"/>
                                 </t>
-                            </div>
+                            </div>G
                         </t>
                         <div class="col-md-12 col-lg-12 one_kanban">
                             <a role="button" href="#" id="add_adress" class=' btn span-gold float-right mb-2 '>
@@ -469,7 +469,7 @@
             <input type="hidden" name="submitted" value="1"/>
             <input type="hidden" name="contact_id" value=""/>
 
-            <input type="hidden" name="partner_id" t-att-value="user.partner_id.id or ''"/>
+            <input type="hidden" name="partner_id" t-att-value="website_sale_order.partner_id.id or ''"/>
             <input type="hidden" name="callback" t-att-value="callback"/>
 
             <div class="justify-content-between">
@@ -511,9 +511,9 @@
             <div class="card-body row" id="shipping_and_billing">
                 <div class="span-gold w-100">DIRECCIÓN DE ENVIO</div>
                 <t t-set="same_shipping"
-                   t-value="bool(website_sale_order.partner_shipping_id==user.partner_id or only_services)"/>
+                   t-value="bool(website_sale_order.partner_shipping_id==website_sale_order.partner_id or only_services)"/>
                 <div class="col-md-8">
-                    <span t-esc="user.partner_id" id="selected_adress_value"
+                    <span t-esc="website_sale_order.partner_id" id="selected_adress_value"
                           t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')"
                           class="address-inline"/>
                 </div>
