@@ -342,7 +342,7 @@
 
     <template id="address_on_payment_ilmin" inherit_id="website_sale.address_on_payment" name="Ilmin addres on payment">
         <xpath expr="//div[hasclass('card')]" position="replace">
-            <t t-set='shippings' t-value="website_sale_order._get_shippings(user.partner_id.id)"/>
+            <t t-set='shippings' t-value="website_sale_order._get_shippings(website_sale_order.partner_id.id)"/>
 
             <div id="all_adress_shipping">
                 <div class="col-lg-12">
