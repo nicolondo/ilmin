@@ -358,7 +358,8 @@
                                     <t t-set="allow_edit"
                                        t-value="not website_sale_order.partner_id or (ship.id in website_sale_order.partner_id.child_ids.ids)"/>
                                 </t>
-                            </div>G
+                            </div>
+                            G
                         </t>
                         <div class="col-md-12 col-lg-12 one_kanban">
                             <a role="button" href="#" id="add_adress" class=' btn span-gold float-right mb-2 '>
@@ -518,7 +519,8 @@
                           class="address-inline"/>
                 </div>
                 <div class="col-md-4">
-                    <a class="float-right span_underlined span_vertical font-weight-bolder " id="choose_address">
+                    <a t-attf-class="#{'float-right span_underlined span_vertical font-weight-bolder' if website_sale_order.cart_quantity  &gt; 0  else 'float-right span_underlined span_vertical font-weight-bolder text-grey disabled'}"
+                       id="choose_address">
                         EDITAR
                     </a>
                 </div>
@@ -554,7 +556,11 @@
                 </div>
                 <div class="col-md-6">
 
-                    <button class="btn " id="finalise-btn">FINALIZAR ORDEN</button>
+                    <button t-attf-class="#{'btn' if website_sale_order.cart_quantity  &gt; 0  else 'btn disabled'}"
+                            id="finalise-btn">
+                        FINALIZAR
+                        ORDEN
+                    </button>
                 </div>
                 <div class="col-md-6" style="text-align:center;display:none;" id="total_summary_phone">
                     <div>
