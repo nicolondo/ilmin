@@ -295,7 +295,7 @@ button.navbar-toggler{
     line-height: 18px;
     color: white !important;
 }
-span.o_force_ltr
+span.o_force_ltr,.text-grey
 {
     color:#616161 !important;
 }
