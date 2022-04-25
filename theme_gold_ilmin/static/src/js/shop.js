@@ -181,8 +181,11 @@ odoo.define('ilmin_theme.website_shop', function (require) {
 
     })
     $("#cart_sammury_ilmin").on("click", "#choose_address", function(ev){
-        $("#address_on_payment").toggle('show')
-        $("#cart_lines_ilmin").toggle('show')
+        let disabled = $(this).hasClass("disabled")
+        if (!disabled){
+            $("#address_on_payment").toggle('show')
+            $("#cart_lines_ilmin").toggle('show')
+        }
 
     })
 
@@ -242,21 +245,24 @@ odoo.define('ilmin_theme.website_shop', function (require) {
     })
 
     $("#cart_sammury_ilmin").on("click", "#finalise-btn", function(ev){
-        var proceed = confirm('CONFIRMACION Estas a punto de confirmar tu orden, éste paso no tiene vuelta atrás !');
-            if(proceed)  {
-            var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
-            ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
-               if(data['success']){
-                    var alert = $('#alert_order_success')
-                    alert.find('#order_alert').text(data['order_name']);
-                    alert.toggle('show')
+        let disabled = $(this).hasClass("disabled")
+        if (!disabled){
+            var proceed = confirm('CONFIRMACION Estas a punto de confirmar tu orden, éste paso no tiene vuelta atrás !');
+                if(proceed)  {
+                var contact_id = $('.shippement_selected').find('.edit_address').attr("data-contact-id");
+                ajax.jsonRpc('/shop/cart/shop_confirm_order', 'call',{'contact_id':contact_id}).then(function(data) {
+                   if(data['success']){
+                        var alert = $('#alert_order_success')
+                        alert.find('#order_alert').text(data['order_name']);
+                        alert.toggle('show')
 
-                    window.location.replace(data['url'])
-              }else{
-                    var alert = $('#alert_order_failed')
-                    alert.toggle('show')
-              }
-            });
+                        window.location.replace(data['url'])
+                  }else{
+                        var alert = $('#alert_order_failed')
+                        alert.toggle('show')
+                  }
+                });
+            }
         }
     })
 
