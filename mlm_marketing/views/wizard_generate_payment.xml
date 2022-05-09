@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="generate_payment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Generate Payments</field>
+        <field name="res_model">pos.wizardgpayment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="mlm_marketing.model_pos_commission"/>
+    </record>
+
+    <record id="generate_payments_wizard_view" model="ir.ui.view">
+        <field name="name">Generate Payments</field>
+        <field name="model">pos.wizardgpayment</field>
+        <field name="arch" type="xml">
+            <form string="Generate Payments">
+                <div>
+                    Select the variants you want to create BOM for, and the percentage of perfume concentration
+                </div>
+                <group>
+                    <field name="journal_id"/>
+                </group>
+                <footer>
+                    <button string="Confirm" name="confirm" type="object" class="btn-primary"/>
+                    <button string="Confirm and Generate Payment" name="generate_payments" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
