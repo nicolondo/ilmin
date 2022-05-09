@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_comission_form" model="ir.ui.view">
+        <field name="name">pos.commission.form</field>
+        <field name="model">pos.commission</field>
+        <field name="arch" type="xml">
+            <form string="Commissions">
+                <header>
+                    <button name="action_confirm" string="Confirm" class="oe_highlight" type="object" states="new"/>
+                    <button name="action_cancel" string="Cancel" type="object" states="confirm"/>
+                    <button name="action_create_payment" string="Create Payment" class="oe_highlight" type="object"
+                            states="confirm"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <!-- <div class="oe_button_box" name="button_box">
+                         <button name="action_confirm" type="object"
+                                 class="oe_stat_button" icon="fa-star">
+                             <div class="o_stat_info">
+                                 <field name="commission_l1" class="o_stat_value"/>
+                                 <span class="o_stat_text">Leads</span>
+                             </div>
+                         </button>
+                     </div>-->
+                    <group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="pos_order"/>
+                            <field name="move_id"/>
+                            <field name="user_id"/>
+                            <field name="commission_type"/>
+                        </group>
+                        <group>
+                            <field name="total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="commission_l1" attrs="{'invisible':[('commission_type','!=','l1')]}"
+                                   widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="commission_l2" attrs="{'invisible':[('commission_type','!=','l2')]}"
+                                   widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="commission_l3" attrs="{'invisible':[('commission_type','!=','l3')]}"
+                                   widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_pos_comission_tree" model="ir.ui.view">
+        <field name="name">pos.commission.tree</field>
+        <field name="model">pos.commission</field>
+        <field name="arch" type="xml">
+            <tree string="Commissions">
+                <field name="currency_id" invisible="1"/>
+                <field name="create_date"/>
+                <field name="pos_order"/>
+                <field name="move_id"/>
+                <field name="user_id"/>
+                <field name="commission_type"/>
+                <field name="total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="commission_l1" attrs="{'invisible':[('commission_type','!=','l1')]}" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="commission_l2" attrs="{'invisible':[('commission_type','!=','l2')]}" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="commission_l3" attrs="{'invisible':[('commission_type','!=','l3')]}" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="state" widget="badge" decoration-info="state == 'new'" decoration-success="state == 'paid'"
+                       decoration-warning="state == 'confirm'"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
