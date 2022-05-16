@@ -14,9 +14,11 @@
                     <t t-name="kanban-box">
                         <div class="row w-100 " style="display: contents;">
                             <div class="card o_kanban_record dash_kanban_record w-100 mt-4 ml-5 mr-5 p-4">
-                                <span id="hello_user">HOLA <span class="pl-2">
-                                    <field name="user_id"/>
-                                    !</span>
+                                <span id="hello_user">HOLA
+                                    <span class="pl-2">
+                                        <field name="user_id"/>
+                                        !
+                                    </span>
                                 </span>
                                 <div class="pt-3 d-none">
                                     <span class="d-flex">Esta semana visitaras a 6 personas</span>
@@ -134,6 +136,15 @@
     </record>
 
 
+    <record id="my_commissions_form_action"
+            model="ir.actions.act_window">
+        <field name="name">My Commission</field>
+        <field name="res_model">pos.commission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+
     <menuitem id="mlm_menu" name="MLM"
               web_icon="mlm_marketing,static/description/icon.png"/>
 
@@ -159,9 +170,12 @@
 
     <menuitem id="mlm_menu_dashboards"
               name="All Dashboards" parent="mlm_main_menu_dashboard"
-              action="dashboards_form_action" sequence="20"/>
+              action="dashboards_form_action" sequence="10"/>
     <menuitem id="mlm_my_menu_dashboard"
               name="My Dashboard" parent="mlm_main_menu_dashboard"
-              action="my_dashboard_kanban_action" sequence="10"/>
+              action="my_dashboard_kanban_action" sequence="20"/>
+    <menuitem id="mlm_my_commissions"
+              name="My Commissions" parent="mlm_main_menu_dashboard"
+              action="my_commissions_form_action" sequence="30"/>
 
 </odoo>

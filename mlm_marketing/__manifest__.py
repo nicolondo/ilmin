@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'point_of_sale', 'sale'],
+    'depends': ['base', 'point_of_sale', 'sale', 'hr','account'],
 
     # always loaded
     'data': [
@@ -28,13 +28,14 @@
         'views/res_config_setting.xml',
         'views/res_users_views.xml',
         'views/product.xml',
-        #'views/pos_order.xml',
+        'views/pos_commission.xml',
+        'views/wizard_generate_payment.xml',
+        # 'views/pos_order.xml',
         'views/product_product.xml',
         'views/brand.xml',
         'views/import_bom_wizard.xml',
         'views/mlm_dashboard.xml',
         'views/mlm_onboarding_panel_view.xml',
-
     ],
     # only loaded in demonstration mode
     'demo': [
