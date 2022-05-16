@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from datetime import datetime, timedelta
 
 
 class Mlm(models.Model):
@@ -21,7 +22,7 @@ class Mlm(models.Model):
     ], string='Type', readonly=True, required=True, tracking=True, copy=False)
     state = fields.Selection([
         ('new', 'New'),
-        ('confirm', 'Confirmed'),
+        ('confirm', 'Invoiced'),
         ('paid', 'Paid')
     ], string='Status', readonly=True, required=True, tracking=True, copy=False, default='new')
 
@@ -37,31 +38,42 @@ class Mlm(models.Model):
         for com in self:
             com.state = 'paid'
 
-    def _prepare_invoice(self, journal_id):
+    def _prepare_invoice(self, journal_id, company_id, partner_id, commissions):
         """Prepare the dict of values to create the new invoice for a purchase order.
         """
-        self.ensure_one()
-        move_type = self._context.get('default_move_type', 'in_invoice')
+        move_type = self._context.get('default_move_type', 'out_invoice')
         journal = self.env['account.move'].browse(journal_id)
-        if not journal:
-            raise UserError(_('Please define an accounting purchase journal for the company %s (%s).') % (
-                self.company_id.name, self.company_id.id))
+        company = self.env['res.company'].browse(company_id)
 
-        partner_invoice_id = self.partner_id.address_get(['invoice'])['invoice']
+        if not journal:
+            raise UserError(_('Please define an accounting  journal'))
+        product_id = int(self.env['ir.config_parameter'].sudo().get_param('mlm_marketing.comission_product'))
+        if not product_id:
+            raise UserError(_("Please select an cimission product"))
+
+        partner_invoice_id = partner_id.address_get(['invoice'])['invoice']
+
+        inv_lines = []
+        for com in commissions:
+            price = 0
+            if com.commission_type == 'l1':
+                price = com.commission_l1
+            elif com.commission_type == 'l2':
+                price = com.commission_l2
+            elif com.commission_type == 'l3':
+                price = com.commission_l3
+
+            inv_lines += [(0, 0, {
+                'product_id': product_id,
+                'price_unit': price,
+            })]
+
         invoice_vals = {
-            'ref': self.partner_ref or '',
+            'invoice_date': datetime.today(),
             'move_type': move_type,
-            'narration': self.notes,
-            'currency_id': self.currency_id.id,
-            'invoice_user_id': self.user_id and self.user_id.id or self.env.user.id,
+            'currency_id': company.currency_id.id,
             'partner_id': partner_invoice_id,
-            'fiscal_position_id': (
-                    self.fiscal_position_id or self.fiscal_position_id.get_fiscal_position(partner_invoice_id)).id,
-            'payment_reference': self.partner_ref or '',
-            'partner_bank_id': self.partner_id.bank_ids[:1].id,
-            'invoice_origin': self.name,
-            'invoice_payment_term_id': self.payment_term_id.id,
-            'invoice_line_ids': [],
-            'company_id': self.company_id.id,
+            'invoice_line_ids': inv_lines,
+            'company_id': company_id,
         }
         return invoice_vals
